@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}UFR STA{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+        <div class="header-brand">
+            <img src="{{ url_for('static', filename='images/logo_ufr_sta.png') }}" alt="Logo UFR STA" class="header-logo" onerror="this.style.display='none'">
+            <div class="header-title">
+                <span class="header-acronym">UFR STA</span>
+                <span class="header-subtitle">Sciences des Technologies Avancées</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <button class="nav-toggle" onclick="toggleMenu()">&#9776;</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Accueil</a></li>
+                <li><a href="{{ url_for('departements') }}" class="nav-link">Départements</a></li>
+                <li><a href="{{ url_for('formations') }}" class="nav-link">Formations</a></li>
+                <li><a href="{{ url_for('actualites') }}" class="nav-link">Actualités</a></li>
+                <li><a href="{{ url_for('activites') }}" class="nav-link">Activités</a></li>
+                <li><a href="{{ url_for('galerie') }}" class="nav-link">Galerie</a></li>
+                <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <div class="footer-col">
+            <h3 class="footer-heading">UFR STA</h3>
+            <p>Université Amadou Mahtar Mbow<br>de Diamniadio</p>
+        </div>
+        <div class="footer-col">
+            <h3 class="footer-heading">Liens rapides</h3>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('formations') }}">Formations</a></li>
+                <li><a href="{{ url_for('departements') }}">Départements</a></li>
+                <li><a href="{{ url_for('actualites') }}">Actualités</a></li>
+                <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3 class="footer-heading">Contact</h3>
+            <p>Diamniadio, Sénégal</p>
+            <p><a href="mailto:contact@ufrsta.uam.edu.sn">contact@ufrsta.uam.edu.sn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 UFR STA — Université Amadou Mahtar Mbow. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+</script>
+</body>
+</html>
