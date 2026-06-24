@@ -1,0 +1,224 @@
+ {% extends "base.html" %}
+{% block title %}Accueil — UFR STA{% endblock %}
+
+{% block content %}
+
+ <section class="hero">
+  <div class="hero-slider">
+    <div class="hero-slide active" style="background-image: url('{{ url_for('static', filename='images/sta.jpg') }}')"></div>
+    <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/l3inf.jpg') }}')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Université Amadou Mahtar Mbow de Diamniadio</p>
+      <h1 class="hero-titre">UFR Sciences des Technologies Avancées</h1>
+      <p class="hero-desc">
+        Mathématiques, Physique, Informatique, Science de la Mer et du Littoral (SML)
+        et Mathématiques Appliquées à la Vie Sociale (MIASS).
+      </p>
+      <div class="hero-actions">
+        <a href="{{ url_for('formations') }}" class="btn btn-primaire">Découvrir nos formations</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-outline">Nous contacter</a>
+      </div>
+    </div>
+    <div class="hero-logo-wrap">
+      <img src="{{ url_for('static', filename='images/logo_ufr_sta.png') }}" alt="Logo UFR STA" class="hero-logo">
+    </div>
+  </div>
+</section>
+
+<section class="chiffres section">
+  <div class="container">
+    <div class="chiffres-grid">
+      <div class="chiffre-item"><span class="chiffre-nb">5</span><span class="chiffre-label">Départements</span></div>
+      <div class="chiffre-item"><span class="chiffre-nb">10+</span><span class="chiffre-label">Formations</span></div>
+      <div class="chiffre-item"><span class="chiffre-nb">500+</span><span class="chiffre-label">Étudiants</span></div>
+      <div class="chiffre-item"><span class="chiffre-nb">30+</span><span class="chiffre-label">Enseignants</span></div>
+    </div>
+  </div>
+</section>
+
+ <!-- ========== NOS FILIÈRES ========== -->
+<section class="filieres section" style="background:#f5f5f5;">
+  <div class="container">
+    <h2 class="section-title">Nos filières</h2>
+    <p class="section-subtitle">Des disciplines scientifiques pour préparer les leaders de demain</p>
+    <div class="cards-grid">
+
+      <div class="card filiere-card">
+        <img src="{{ url_for('static', filename='images/inf.jpg') }}" alt="Informatique" class="filiere-img" onerror="this.style.display='none'">
+        <div class="card-body">
+          <h3 class="card-title">Informatique</h3>
+          <p class="card-text">Algorithmique, programmation, bases de données, cybersécurité et IA.</p>
+          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+        </div>
+      </div>
+
+      <div class="card filiere-card">
+        <img src="{{ url_for('static', filename='images/math.jpg') }}" alt="Mathématiques" class="filiere-img" onerror="this.style.display='none'">
+        <div class="card-body">
+          <h3 class="card-title">Mathématiques</h3>
+          <p class="card-text">Analyse, algèbre, statistiques et mathématiques fondamentales.</p>
+          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+        </div>
+      </div>
+
+      <div class="card filiere-card">
+        <img src="{{ url_for('static', filename='images/physique.jpg') }}" alt="Physique" class="filiere-img" onerror="this.style.display='none'">
+        <div class="card-body">
+          <h3 class="card-title">Physique</h3>
+          <p class="card-text">Mécanique, thermodynamique et électromagnétisme.</p>
+          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+        </div>
+      </div>
+
+      <div class="card filiere-card">
+        <img src="{{ url_for('static', filename='images/sml.jpg') }}" alt="SML" class="filiere-img" onerror="this.style.display='none'">
+        <div class="card-body">
+          <h3 class="card-title">SML</h3>
+          <p class="card-text">Science de la Mer et du Littoral — écosystèmes marins du Sénégal.</p>
+          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+        </div>
+      </div>
+
+      <div class="card filiere-card">
+        <img src="{{ url_for('static', filename='images/miass.jpg') }}" alt="MIASS" class="filiere-img" onerror="this.style.display='none'">
+        <div class="card-body">
+          <h3 class="card-title">MIASS</h3>
+          <p class="card-text">Mathématiques Appliquées à la Vie Sociale — statistiques et modélisation.</p>
+          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="directeur section">
+  <div class="container directeur-inner">
+    <img src="{{ url_for('static', filename='images/dr.jpg') }}" 
+     alt="Directeur UFR STA" 
+     class="directeur-avatar"
+     onerror="this.outerHTML='<div class=directeur-avatar>Dr</div>'">
+    <div class="directeur-texte">
+      <p class="directeur-eyebrow">Mot du Directeur</p>
+      <h2 class="section-title">Excellence et innovation scientifique</h2>
+      <blockquote class="directeur-quote">
+        "L'UFR STA est un espace où la science rencontre l'ambition. Nos étudiants
+        ne se contentent pas d'apprendre — ils créent, ils innovent et résolvent
+        les défis concrets de notre société. Chaque étudiant ici est un futur
+        acteur du changement. Bienvenue dans notre communauté scientifique."
+      </blockquote>
+      <p class="directeur-nom">— Dr COULIBALY, Directeur de l'UFR STA</p>
+    </div>
+  </div>
+</section>
+
+ <!-- ========== PROJETS IoT ========== -->
+<section class="projets section" style="background:#f5f5f5;">
+  <div class="container">
+    <h2 class="section-title">Projets IoT réalisés</h2>
+    <p class="section-subtitle">Nos étudiants innovent et créent des solutions technologiques concrètes</p>
+    <div class="cards-grid">
+
+      <div class="card">
+        <video class="card-img" controls muted playsinline>
+          <source src="{{ url_for('static', filename='images/video.mp4') }}" type="video/mp4">
+        </video>
+        <div class="card-body">
+          <span class="badge-date">2026</span>
+          <h3 class="card-title">Station Météo Connectée</h3>
+          <p class="card-text">
+            Station météorologique IoT développée par les étudiants de L3 Informatique.
+            Collecte en temps réel la température, l'humidité, la pression
+            atmosphérique et la vitesse du vent.
+          </p>
+          <div class="iot-tags">
+            <span class="iot-tag">Arduino</span>
+            <span class="iot-tag">Raspberry Pi</span>
+            <span class="iot-tag">Python</span>
+            <span class="iot-tag">Dashboard Web</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="actualites-home section">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+      <h2 class="section-title" style="margin-bottom:0;">Dernières actualités</h2>
+      <a href="{{ url_for('actualites') }}" class="btn btn-outline" style="border-color:#8B3A2A;color:#8B3A2A;">Toutes les actualités →</a>
+    </div>
+    <div class="cards-grid">
+
+      <!-- Trophée football -->
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/foot.jpg') }}" 
+             alt="Trophée football UFR STA" 
+             class="card-img"
+             onerror="this.outerHTML='<div class=card-img-placeholder>🏆</div>'">
+        <div class="card-body">
+          <span class="badge-date">2026</span>
+          <h3 class="card-title">Trophée de Football UFR STA</h3>
+          <p class="card-text">
+            L'équipe de football de l'UFR STA remporte le trophée lors du tournoi
+            inter-UFR de l'Université Amadou Mahtar Mbow. Félicitations à toute l'équipe !
+          </p>
+          <a href="{{ url_for('actualites') }}" class="lien-filiere">Lire la suite →</a>
+        </div>
+      </div>
+
+      <!-- Journée Excellence -->
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/excelence.jpg') }}" 
+             alt="Journée de l'Excellence UFR STA" 
+             class="card-img"
+             onerror="this.outerHTML='<div class=card-img-placeholder>🎖️</div>'">
+        <div class="card-body">
+          <span class="badge-date">09 Mai 2026</span>
+          <h3 class="card-title">Journée de l'Excellence UFR STA</h3>
+          <p class="card-text">
+            L'AESTA a organisé une Journée de l'Excellence dédiée à la valorisation
+            du mérite académique et de l'engagement estudiantin, sous le parrainage
+            du Prof. Amadou Dahirou GUEYE, Vice-Recteur de l'UAM.
+          </p>
+          <a href="{{ url_for('actualites') }}" class="lien-filiere">Lire la suite →</a>
+        </div>
+      </div>
+
+    <div class="card">
+    <img src="{{ url_for('static', filename='images/cand.jpg') }}" 
+         alt="Appel à candidature UFR STA" 
+         class="card-img"
+         onerror="this.outerHTML='<div class=card-img-placeholder>📢</div>'">
+    <div class="card-body">
+        <span class="badge-date">Avril 2026</span>
+        <h3 class="card-title">Appel à candidature Master</h3>
+        <p class="card-text">
+            Inscriptions Master Informatique 2026-2027 ouvertes jusqu'au 30 juin.
+        </p>
+        <a href="{{ url_for('actualites') }}" class="lien-filiere">Lire la suite →</a>
+    </div>
+</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% block extra_js %}
+<script>
+    const slides = document.querySelectorAll('.hero-slide');
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 2000);
+</script>
+{% endblock %}
+{% endblock %}
