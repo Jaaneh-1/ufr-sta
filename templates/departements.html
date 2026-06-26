@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block title %}Départements — UFR STA{% endblock %}
+
+{% block content %}
+
+<!-- ========== HERO ========== -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <p class="hero-eyebrow">Organisation académique</p>
+    <h1 class="page-hero-titre">Nos Départements</h1>
+    <p class="page-hero-desc">
+      L'UFR STA ambitionne d'être un hub scientifique, technologique et d'innovation
+      de référence en Afrique, au service du développement socio-économique du Sénégal.
+    </p>
+  </div>
+</section>
+
+<!-- ========== INTRO VISION ========== -->
+<section class="section reveal" style="padding-bottom:0;">
+  <div class="container">
+    <div class="intro-block reveal">
+      <p class="intro-text">
+        L'UFR Sciences et Technologies Avancées de l'UAM est organisée autour de
+        <strong>deux départements complémentaires</strong>. Chacun propose des formations
+        innovantes dans le cadre d'un modèle pédagogique intégré qui allie formation
+        professionnelle et formation par la recherche, conformément aux recommandations
+        de la CNAES.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GRANDES CARDS DÉPARTEMENTS ========== -->
+<section class="section">
+  <div class="container">
+    <div class="dept-cards-grid">
+
+      <!-- CARTE 1 : MIM -->
+      <div class="dept-big-card reveal" id="dim">
+        <div class="dept-card-top dept-card-top-marron">
+          <div class="dept-card-icon">⚙️</div>
+          <div class="dept-card-num">01</div>
+        </div>
+        <img src="{{ url_for('static', filename='images/mim.jpg') }}" alt="Département MIM" class="dept-card-cover" loading="lazy" onerror="this.style.display='none'">
+        <div class="dept-card-body">
+          <span class="dept-eyebrow">Département</span>
+          <h2 class="dept-card-titre">Mathématiques, Informatique et Modélisation</h2>
+          <span class="dept-card-sigle">MIM</span>
+          <p class="dept-card-desc">
+            Forme des spécialistes en mathématiques, informatique et modélisation numérique.
+            Développe les compétences analytiques, algorithmiques et de résolution de problèmes
+            pour les métiers de la tech, de la finance et de la recherche.
+          </p>
+
+          <div class="dept-card-filieres">
+            <h4 class="dept-card-filieres-titre">Filières</h4>
+            <div class="dept-filiere-row">
+              <span class="dept-filiere-icon">🖥️</span>
+              <div>
+                <a href="{{ url_for('formations') }}#mpi" class="dept-filiere-link"><strong>MPI</strong></a> — Mathématiques, Physique et Informatique
+                <div class="filiere-niveaux" style="margin-top:0.3rem;">
+                  <span class="niveau-tag">Licence</span>
+                  <span class="niveau-tag">Master</span>
+                  <span class="niveau-tag">Doctorat</span>
+                </div>
+              </div>
+            </div>
+            <div class="dept-filiere-row">
+              <span class="dept-filiere-icon">📊</span>
+              <div>
+                <a href="{{ url_for('formations') }}#miass" class="dept-filiere-link"><strong>MIASS</strong></a> — Mathématiques Appliquées à la Vie Sociale
+                <div class="filiere-niveaux" style="margin-top:0.3rem;">
+                  <span class="niveau-tag">Licence</span>
+                  <span class="niveau-tag">Master</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-card-responsable">
+            <div class="resp-avatar">DR</div>
+            <div>
+              <p class="resp-label">Responsable</p>
+              <p class="resp-nom">Dr. SOW</p>
+            </div>
+          </div>
+
+          <div class="dept-card-contact">
+            <span>📍 Bâtiment A — UFR STA</span>
+            <a href="mailto:dim@ufrsta.uam.edu.sn" class="btn btn-primaire" style="font-size:0.85rem; padding:0.5rem 1rem;">
+              ✉️ Contacter le département
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARTE 2 : SMU -->
+      <div class="dept-big-card reveal" id="smu">
+        <div class="dept-card-top dept-card-top-turquoise">
+          <div class="dept-card-icon">🌊</div>
+          <div class="dept-card-num">02</div>
+        </div>
+        <img src="{{ url_for('static', filename='images/smu.jpg') }}" alt="Département SMU" class="dept-card-cover" loading="lazy" onerror="this.style.display='none'">
+        <div class="dept-card-body">
+          <span class="dept-eyebrow" style="color:var(--turquoise);">Département</span>
+          <h2 class="dept-card-titre">Sciences de la Matière et de l'Univers</h2>
+          <span class="dept-card-sigle dept-card-sigle-turquoise">SMU</span>
+          <p class="dept-card-desc">
+            S'appuie sur les nanosciences et une approche expérimentale couplée à la
+            modélisation. Couvre les sciences marines, la physique appliquée dans les
+            secteurs de l'énergie, des matériaux, de l'eau et du spatial.
+          </p>
+
+          <div class="dept-card-filieres">
+            <h4 class="dept-card-filieres-titre">Filières</h4>
+            <div class="dept-filiere-row">
+              <span class="dept-filiere-icon">🐟</span>
+              <div>
+                <a href="{{ url_for('formations') }}#sml" class="dept-filiere-link"><strong>SML</strong></a> — Sciences de la Mer et du Littoral
+                <div class="filiere-niveaux" style="margin-top:0.3rem;">
+                  <span class="niveau-tag">Licence</span>
+                  <span class="niveau-tag">Master</span>
+                  <span class="niveau-tag">Doctorat</span>
+                </div>
+              </div>
+            </div>
+            <div class="dept-filiere-row">
+              <span class="dept-filiere-icon">⚛️</span>
+              <div>
+                <a href="{{ url_for('formations') }}#pa" class="dept-filiere-link"><strong>PA</strong></a> — Physique et Applications
+                <div class="filiere-niveaux" style="margin-top:0.3rem;">
+                  <span class="niveau-tag">Licence</span>
+                  <span class="niveau-tag">Master</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-card-responsable">
+            <div class="resp-avatar resp-avatar-turquoise">DR</div>
+            <div>
+              <p class="resp-label">Responsable</p>
+              <p class="resp-nom">Dr. NDAO</p>
+            </div>
+          </div>
+
+          <div class="dept-card-contact">
+            <span>📍 Bâtiment B — UFR STA</span>
+            <a href="mailto:smu@ufrsta.uam.edu.sn" class="btn btn-turquoise" style="font-size:0.85rem; padding:0.5rem 1rem;">
+              ✉️ Contacter le département
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== LABORATOIRE CMED ========== -->
+<section class="section labo-section reveal">
+  <div class="container">
+    <div class="labo-inner">
+      <div class="labo-texte">
+        <span class="dept-eyebrow">Recherche & Innovation</span>
+        <h2 class="section-title">Laboratoire CMED</h2>
+        <p class="labo-desc">
+          Les activités de recherche sont organisées au sein du
+          <strong>Laboratoire Calcul scientifique, Modélisation, Environnement
+          et Développement durable (CMED)</strong>, structuré en trois équipes :
+        </p>
+        <div class="equipes-list">
+          <div class="equipe-item">
+            <span class="equipe-sigle">CMS</span>
+            <span>Calcul scientifique, Modélisation et Simulations numériques</span>
+          </div>
+          <div class="equipe-item">
+            <span class="equipe-sigle equipe-sigle-turquoise">2EMC</span>
+            <span>Eau, Environnement Marin-Littoral et Changements climatiques</span>
+          </div>
+          <div class="equipe-item">
+            <span class="equipe-sigle">MIT</span>
+            <span>Matériaux et Innovation Technologiques</span>
+          </div>
+        </div>
+      </div>
+      <div class="labo-stat-col">
+        <div class="labo-stat"><span class="labo-nb">3</span><span class="labo-label">Équipes de recherche</span></div>
+        <div class="labo-stat"><span class="labo-nb">20+</span><span class="labo-label">Thématiques ciblées</span></div>
+        <div class="labo-stat"><span class="labo-nb">1</span><span class="labo-label">Laboratoire pluridisciplinaire</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section section reveal">
+  <div class="container cta-inner">
+    <div>
+      <h2 class="cta-titre">Intéressé par nos formations ?</h2>
+      <p class="cta-desc">Consultez nos programmes détaillés et les conditions d'admission.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="{{ url_for('formations') }}" class="btn btn-primaire">Voir toutes les formations</a>
+      <a href="{{ url_for('contact') }}" class="btn btn-outline-marron">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -3,7 +3,7 @@
 
 {% block content %}
 
- <section class="hero">
+ <section class="hero reveal">
   <div class="hero-slider">
     <div class="hero-slide active" style="background-image: url('{{ url_for('static', filename='images/sta.jpg') }}')"></div>
     <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/l3inf.jpg') }}')"></div>
@@ -31,10 +31,10 @@
 <section class="chiffres section">
   <div class="container">
     <div class="chiffres-grid">
-      <div class="chiffre-item"><span class="chiffre-nb">5</span><span class="chiffre-label">Départements</span></div>
-      <div class="chiffre-item"><span class="chiffre-nb">10+</span><span class="chiffre-label">Formations</span></div>
-      <div class="chiffre-item"><span class="chiffre-nb">500+</span><span class="chiffre-label">Étudiants</span></div>
-      <div class="chiffre-item"><span class="chiffre-nb">30+</span><span class="chiffre-label">Enseignants</span></div>
+      <div class="chiffre-item reveal"><span class="chiffre-nb" data-target="5" data-duration="900" data-display="5+">0</span><span class="chiffre-label">Départements</span></div>
+      <div class="chiffre-item reveal"><span class="chiffre-nb" data-target="10" data-duration="900" data-display="10+">0</span><span class="chiffre-label">Formations</span></div>
+      <div class="chiffre-item reveal"><span class="chiffre-nb" data-target="500" data-duration="1200" data-suffix="+">0</span><span class="chiffre-label">Étudiants</span></div>
+      <div class="chiffre-item reveal"><span class="chiffre-nb" data-target="30" data-duration="900" data-suffix="+">0</span><span class="chiffre-label">Enseignants</span></div>
     </div>
   </div>
 </section>
@@ -46,48 +46,48 @@
     <p class="section-subtitle">Des disciplines scientifiques pour préparer les leaders de demain</p>
     <div class="cards-grid">
 
-      <div class="card filiere-card">
+      <div class="card filiere-card reveal">
         <img src="{{ url_for('static', filename='images/inf.jpg') }}" alt="Informatique" class="filiere-img" onerror="this.style.display='none'">
         <div class="card-body">
           <h3 class="card-title">Informatique</h3>
           <p class="card-text">Algorithmique, programmation, bases de données, cybersécurité et IA.</p>
-          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+          <a href="{{ url_for('formations') }}#mpi" class="lien-filiere">Voir les formations →</a>
         </div>
       </div>
 
-      <div class="card filiere-card">
+      <div class="card filiere-card reveal">
         <img src="{{ url_for('static', filename='images/math.jpg') }}" alt="Mathématiques" class="filiere-img" onerror="this.style.display='none'">
         <div class="card-body">
           <h3 class="card-title">Mathématiques</h3>
           <p class="card-text">Analyse, algèbre, statistiques et mathématiques fondamentales.</p>
-          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+          <a href="{{ url_for('formations') }}#mpi" class="lien-filiere">Voir les formations →</a>
         </div>
       </div>
 
-      <div class="card filiere-card">
+      <div class="card filiere-card reveal">
         <img src="{{ url_for('static', filename='images/physique.jpg') }}" alt="Physique" class="filiere-img" onerror="this.style.display='none'">
         <div class="card-body">
           <h3 class="card-title">Physique</h3>
           <p class="card-text">Mécanique, thermodynamique et électromagnétisme.</p>
-          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+          <a href="{{ url_for('formations') }}#pa" class="lien-filiere">Voir les formations →</a>
         </div>
       </div>
 
-      <div class="card filiere-card">
+      <div class="card filiere-card reveal">
         <img src="{{ url_for('static', filename='images/sml.jpg') }}" alt="SML" class="filiere-img" onerror="this.style.display='none'">
         <div class="card-body">
           <h3 class="card-title">SML</h3>
           <p class="card-text">Science de la Mer et du Littoral — écosystèmes marins du Sénégal.</p>
-          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+          <a href="{{ url_for('formations') }}#sml" class="lien-filiere">Voir les formations →</a>
         </div>
       </div>
 
-      <div class="card filiere-card">
+      <div class="card filiere-card reveal">
         <img src="{{ url_for('static', filename='images/miass.jpg') }}" alt="MIASS" class="filiere-img" onerror="this.style.display='none'">
         <div class="card-body">
           <h3 class="card-title">MIASS</h3>
           <p class="card-text">Mathématiques Appliquées à la Vie Sociale — statistiques et modélisation.</p>
-          <a href="{{ url_for('formations') }}" class="lien-filiere">Voir les formations →</a>
+          <a href="{{ url_for('formations') }}#miass" class="lien-filiere">Voir les formations →</a>
         </div>
       </div>
 
