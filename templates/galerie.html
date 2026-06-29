@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+{% block title %}Galerie — UFR STA{% endblock %}
+
+{% block content %}
+
+<!-- ========== HERO ========== -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <p class="hero-eyebrow">Moments & Souvenirs</p>
+    <h1 class="page-hero-titre">Galerie Photos</h1>
+    <p class="page-hero-desc">
+      Revivez les grands moments de l'UFR STA — journées scientifiques,
+      hackathons, ateliers et activités estudiantines.
+    </p>
+  </div>
+</section>
+
+<!-- ========== FILTRES ALBUMS ========== -->
+<section class="formations-nav-section">
+  <div class="container">
+    <div class="formations-nav">
+      <button class="filtre-btn active" onclick="filtrerAlbum(this,'tous')">Tous les albums</button>
+      <button class="filtre-btn" onclick="filtrerAlbum(this,'2026')">📅 2026</button>
+      <button class="filtre-btn" onclick="filtrerAlbum(this,'scientifique')">🔬 Scientifique</button>
+      <button class="filtre-btn" onclick="filtrerAlbum(this,'sport')">⚽ Sport & Culture</button>
+      <button class="filtre-btn" onclick="filtrerAlbum(this,'ceremonie')">🎓 Cérémonies</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ANNÉE 2026 ========== -->
+<section class="section galerie-annee" data-annee="2026">
+  <div class="container">
+    <div class="galerie-annee-header">
+      <h2 class="galerie-annee-titre">2026</h2>
+      <div class="galerie-annee-line"></div>
+    </div>
+
+    <div class="albums-grid">
+
+      <!-- ALBUM 1 : Journée Excellence -->
+      <div class="album-card" data-cat="ceremonie" onclick="ouvrirAlbum('excellence2026')">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename='images/excelence.jpg') }}"
+               alt="Journée de l'Excellence 2026"
+               class="album-img"
+               onerror="this.parentElement.innerHTML='<div class=album-img-placeholder>🎖️</div>'">
+          <div class="album-overlay">
+            <span class="album-voir">Voir l'album →</span>
+          </div>
+          <span class="album-count-badge">8 photos</span>
+        </div>
+        <div class="album-info">
+          <div class="album-cat-badge album-cat-ceremonie">Cérémonie</div>
+          <h3 class="album-titre">Journée de l'Excellence UFR STA</h3>
+          <p class="album-date">📅 09 Mai 2026</p>
+          <p class="album-desc">
+            Valorisation du mérite académique et de l'engagement estudiantin,
+            sous le parrainage du Prof. Amadou Dahirou GUEYE, Vice-Recteur de l'UAM.
+          </p>
+        </div>
+      </div>
+
+      <!-- ALBUM 2 : Trophée Football -->
+      <div class="album-card" data-cat="sport" onclick="ouvrirAlbum('foot2026')">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename='images/foot.jpg') }}"
+               alt="Trophée Football UFR STA"
+               class="album-img"
+               onerror="this.parentElement.innerHTML='<div class=album-img-placeholder>🏆</div>'">
+          <div class="album-overlay">
+            <span class="album-voir">Voir l'album →</span>
+          </div>
+          <span class="album-count-badge">12 photos</span>
+        </div>
+        <div class="album-info">
+          <div class="album-cat-badge album-cat-sport">Sport</div>
+          <h3 class="album-titre">Trophée de Football UFR STA</h3>
+          <p class="album-date">📅 Mars 2026</p>
+          <p class="album-desc">
+            L'équipe de l'UFR STA remporte le trophée du tournoi inter-UFR
+            de l'Université Amadou Mahtar Mbow.
+          </p>
+        </div>
+      </div>
+
+      <!-- ALBUM 3 : Atelier IA -->
+      <div class="album-card" data-cat="scientifique" onclick="ouvrirAlbum('ia2026')">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename='images/l3inf.jpg') }}"
+               alt="Atelier IA Générative"
+               class="album-img"
+               onerror="this.parentElement.innerHTML='<div class=album-img-placeholder>🤖</div>'">
+          <div class="album-overlay">
+            <span class="album-voir">Voir l'album →</span>
+          </div>
+          <span class="album-count-badge">6 photos</span>
+        </div>
+        <div class="album-info">
+          <div class="album-cat-badge album-cat-scientifique">Scientifique</div>
+          <h3 class="album-titre">Atelier IA Générative — L3 Informatique</h3>
+          <p class="album-date">📅 15 Avril 2026</p>
+          <p class="album-desc">
+            Formation destinée aux étudiants de L3 Informatique sur l'utilisation
+            de l'IA générative dans les projets académiques.
+          </p>
+        </div>
+      </div>
+
+      <!-- ALBUM 4 : Station Météo IoT -->
+      <div class="album-card" data-cat="scientifique" onclick="ouvrirAlbum('iot2026')">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename='images/sta.jpg') }}"
+               alt="Projet IoT Station Météo"
+               class="album-img"
+               onerror="this.parentElement.innerHTML='<div class=album-img-placeholder>🌡️</div>'">
+          <div class="album-overlay">
+            <span class="album-voir">Voir l'album →</span>
+          </div>
+          <span class="album-count-badge">10 photos</span>
+        </div>
+        <div class="album-info">
+          <div class="album-cat-badge album-cat-scientifique">Scientifique</div>
+          <h3 class="album-titre">Projet IoT — Station Météo Connectée</h3>
+          <p class="album-date">📅 Février 2026</p>
+          <p class="album-desc">
+            Présentation du projet IoT réalisé par les étudiants de L3 :
+            station météorologique connectée avec Arduino et Raspberry Pi.
+          </p>
+        </div>
+      </div>
+
+      <!-- ALBUM 5 : Appel candidature -->
+      <div class="album-card" data-cat="ceremonie" onclick="ouvrirAlbum('master2026')">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename='images/cand.jpg') }}"
+               alt="Appel à candidature Master"
+               class="album-img"
+               onerror="this.parentElement.innerHTML='<div class=album-img-placeholder>📢</div>'">
+          <div class="album-overlay">
+            <span class="album-voir">Voir l'album →</span>
+          </div>
+          <span class="album-count-badge">5 photos</span>
+        </div>
+        <div class="album-info">
+          <div class="album-cat-badge album-cat-ceremonie">Cérémonie</div>
+          <h3 class="album-titre">Ouverture Master Informatique 2026–2027</h3>
+          <p class="album-date">📅 Avril 2026</p>
+          <p class="album-desc">
+            Cérémonie d'ouverture des candidatures pour le Master Informatique
+            de l'UFR STA — promotion 2026–2027.
+          </p>
+        </div>
+      </div>
+
+      <!-- ALBUM 6 : Forum de l'Emploi -->
+      <div class="album-card" data-cat="scientifique" onclick="ouvrirAlbum('forum2026')">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename='images/IMG-20260625-WA0017.jpg') }}"
+               alt="Forum de l'Emploi UFR STA"
+               class="album-img"
+               onerror="this.parentElement.innerHTML='<div class=album-img-placeholder>📸</div>'">
+          <div class="album-overlay">
+            <span class="album-voir">Voir l'album →</span>
+          </div>
+          <span class="album-count-badge">7 photos</span>
+        </div>
+        <div class="album-info">
+          <div class="album-cat-badge album-cat-scientifique">Scientifique</div>
+          <h3 class="album-titre">Forum de l'Emploi UFR STA</h3>
+          <p class="album-date">📅 Juin 2026</p>
+          <p class="album-desc">Retour en image sur notre forum de l'emploi avec des entreprises et des étudiants engagés.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== LIGHTBOX ========== -->
+<div class="lightbox" id="lightbox" onclick="fermerLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="fermerLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changerPhoto(-1)">‹</button>
+    <img src="" alt="" class="lightbox-img" id="lightboxImg">
+    <button class="lightbox-next" onclick="changerPhoto(1)">›</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* ---- FILTRAGE ---- */
+function filtrerAlbum(btn, cat) {
+  document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.album-card').forEach(card => {
+    const show = cat === 'tous' || card.dataset.cat === cat ||
+                 (cat === '2026' && card.closest('.galerie-annee')?.dataset.annee === '2026');
+    card.style.display = show ? 'flex' : 'none';
+  });
+}
+
+/* ---- LIGHTBOX ---- */
+const albums = {
+  excellence2026: [
+    { src: "{{ url_for('static', filename='images/excelence.jpg') }}", caption: "Journée de l'Excellence — Vue générale" },
+  ],
+  foot2026: [
+    { src: "{{ url_for('static', filename='images/foot.jpg') }}", caption: "Trophée Football — Remise du trophée" },
+  ],
+  ia2026: [
+    { src: "{{ url_for('static', filename='images/l3inf.jpg') }}", caption: "Atelier IA Générative — Session L3 Informatique" },
+  ],
+  iot2026: [
+    { src: "{{ url_for('static', filename='images/sta.jpg') }}", caption: "Station Météo IoT — Présentation du projet" },
+  ],
+  master2026: [
+    { src: "{{ url_for('static', filename='images/cand.jpg') }}", caption: "Ouverture Master Informatique 2026-2027" },
+  ],
+  forum2026: [
+    { src: "{{ url_for('static', filename='images/IMG-20260625-WA0017.jpg') }}", caption: "Forum de l'Emploi UFR STA — rencontres et échanges professionnels" },
+  ],
+};
+
+let currentAlbum = [];
+let currentIndex = 0;
+
+function ouvrirAlbum(albumId) {
+  if (!albums[albumId]) return;
+  currentAlbum = albums[albumId];
+  currentIndex = 0;
+  afficherPhoto();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function afficherPhoto() {
+  const photo = currentAlbum[currentIndex];
+  document.getElementById('lightboxImg').src = photo.src;
+  document.getElementById('lightboxCaption').textContent = photo.caption;
+  document.getElementById('lightboxCounter').textContent =
+    (currentIndex + 1) + ' / ' + currentAlbum.length;
+  const prev = document.querySelector('.lightbox-prev');
+  const next = document.querySelector('.lightbox-next');
+  prev.style.display = currentAlbum.length > 1 ? 'block' : 'none';
+  next.style.display = currentAlbum.length > 1 ? 'block' : 'none';
+}
+
+function changerPhoto(dir) {
+  currentIndex = (currentIndex + dir + currentAlbum.length) % currentAlbum.length;
+  afficherPhoto();
+}
+
+function fermerLightbox(e) {
+  if (!e || e.target === document.getElementById('lightbox') ||
+      e.target.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') changerPhoto(1);
+  if (e.key === 'ArrowLeft') changerPhoto(-1);
+  if (e.key === 'Escape') fermerLightbox();
+});
+</script>
+{% endblock %}

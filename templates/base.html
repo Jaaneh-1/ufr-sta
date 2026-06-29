@@ -67,6 +67,65 @@
     function toggleMenu() {
         document.getElementById('navLinks').classList.toggle('open');
     }
+
+    function markCurrentNavLink() {
+        const normalize = (path) => (path || '').replace(/\/$/, '') || '/';
+        const currentPath = normalize(window.location.pathname);
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const linkPath = normalize(link.getAttribute('href'));
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function setupScrollReveal() {
+        const revealables = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealables.forEach(el => observer.observe(el));
+    }
+
+    function animateCounters() {
+        const counters = document.querySelectorAll('[data-target]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.dataset.target, 10);
+                    const duration = parseInt(counter.dataset.duration || 1600, 10);
+                    let start = 0;
+                    const stepTime = Math.max(30, Math.floor(duration / target));
+                    const increment = Math.ceil(target / (duration / stepTime));
+                    const update = () => {
+                        start += increment;
+                        if (start >= target) {
+                            counter.textContent = counter.dataset.display || target;
+                        } else {
+                            counter.textContent = start + (counter.dataset.suffix || '');
+                            setTimeout(update, stepTime);
+                        }
+                    };
+                    update();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => observer.observe(counter));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        markCurrentNavLink();
+        setupScrollReveal();
+        animateCounters();
+    });
 </script>
+{% block extra_js %}{% endblock %}
 </body>
 </html>

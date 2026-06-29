@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+{% block title %}Formations — UFR STA{% endblock %}
+
+{% block content %}
+
+<!-- ========== HERO ========== -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <p class="hero-eyebrow">Offre pédagogique</p>
+    <h1 class="page-hero-titre">Nos Formations</h1>
+    <p class="page-hero-desc">
+      Licence, Master et Doctorat dans les domaines des STEMS — alignés sur les
+      besoins du marché de l'emploi sénégalais et africain.
+    </p>
+  </div>
+</section>
+
+<!-- ========== FILTRES ========== -->
+<section class="formations-nav-section">
+  <div class="container">
+    <div class="formations-nav">
+      <button class="filtre-btn active" data-filiere="tous" onclick="filtrer(this,'tous')">Toutes les filières</button>
+      <button class="filtre-btn" data-filiere="mpi" onclick="filtrer(this,'mpi')">🖥️ MPI</button>
+      <button class="filtre-btn" data-filiere="miass" onclick="filtrer(this,'miass')">📊 MIASS</button>
+      <button class="filtre-btn" data-filiere="sml" onclick="filtrer(this,'sml')">🌊 SML</button>
+      <button class="filtre-btn" data-filiere="pa" onclick="filtrer(this,'pa')">⚛️ Physique & Applications</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MPI ========== -->
+<section class="section formation-groupe reveal" id="mpi" data-filiere="mpi">
+  <div class="container">
+
+    <div class="fg-header">
+      <div class="fg-dept-badge">Dépt. MIM</div>
+      <h2 class="section-title">Mathématiques, Physique et Informatique</h2>
+      <span class="fg-sigle">MPI</span>
+      <a href="{{ url_for('departements') }}#dim" class="retour-dept-link">← Retour au département MIM</a>
+    </div>
+
+    <!-- LICENCE MPI -->
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-niveau-badge">Licence</div>
+        <h3 class="fc-titre">Licence MPI — Mathématiques, Physique et Informatique</h3>
+      </div>
+      <div class="fc-meta-bar">
+        <span class="fc-meta-badge fc-meta-blue">📚 Niveau : Bac+3</span>
+        <span class="fc-meta-badge fc-meta-green">⏱ Durée : 3 ans</span>
+        <span class="fc-meta-badge fc-meta-grey">🎓 Admission : S1, S1A, S2, S2A, S3, S4</span>
+      </div>
+      <div class="fc-visible-body">
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Objectif</h4>
+          <p class="fc-section-texte">
+            Permettre aux étudiants d'acquérir des connaissances fondamentales, développer
+            des compétences analytiques et de résolution de problèmes, explorer les intersections
+            interdisciplinaires et se préparer aux spécialisations et à la recherche scientifique.
+          </p>
+        </div>
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Débouchés</h4>
+          <div class="debouches-tags">
+            <span class="debouche-tag">Développeur logiciel</span>
+            <span class="debouche-tag">Data Scientist</span>
+            <span class="debouche-tag">Ingénieur IA / IoT</span>
+            <span class="debouche-tag">Analyste cybersécurité</span>
+            <span class="debouche-tag">Architecte de données</span>
+            <span class="debouche-tag">Recherche & Enseignement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCORDÉON PROGRAMME -->
+      <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          📋 Découvrir le programme complet
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="programme-grid">
+            <div class="semestre-block">
+              <div class="sem-header">Semestre 1</div>
+              <ul class="sem-modules">
+                <li>Algorithmique & Structures de données</li>
+                <li>Analyse Mathématique I</li>
+                <li>Algèbre linéaire I</li>
+                <li>Physique générale I</li>
+                <li>Introduction à l'informatique</li>
+                <li>Anglais scientifique I</li>
+              </ul>
+            </div>
+            <div class="semestre-block">
+              <div class="sem-header">Semestre 2</div>
+              <ul class="sem-modules">
+                <li>Programmation orientée objet (Python)</li>
+                <li>Analyse Mathématique II</li>
+                <li>Algèbre linéaire II</li>
+                <li>Physique générale II</li>
+                <li>Logique & Mathématiques discrètes</li>
+                <li>Anglais scientifique II</li>
+              </ul>
+            </div>
+            <div class="semestre-block">
+              <div class="sem-header">Semestre 3</div>
+              <ul class="sem-modules">
+                <li>Bases de données</li>
+                <li>Systèmes d'exploitation</li>
+                <li>Probabilités & Statistiques</li>
+                <li>Mécanique & Thermodynamique</li>
+                <li>Programmation Web</li>
+                <li>Projet encadré I</li>
+              </ul>
+            </div>
+            <div class="semestre-block">
+              <div class="sem-header">Semestre 4</div>
+              <ul class="sem-modules">
+                <li>Réseaux informatiques</li>
+                <li>Cybersécurité fondamentale</li>
+                <li>Électromagnétisme</li>
+                <li>Méthodes numériques</li>
+                <li>Programmation avancée</li>
+                <li>Projet encadré II</li>
+              </ul>
+            </div>
+            <div class="semestre-block">
+              <div class="sem-header">Semestre 5</div>
+              <ul class="sem-modules">
+                <li>Intelligence artificielle</li>
+                <li>Architecture des ordinateurs</li>
+                <li>Modélisation & Simulation</li>
+                <li>Physique des semi-conducteurs</li>
+                <li>Développement mobile</li>
+                <li>Projet encadré III</li>
+              </ul>
+            </div>
+            <div class="semestre-block">
+              <div class="sem-header sem-header-last">Semestre 6</div>
+              <ul class="sem-modules">
+                <li>Big Data & Cloud computing</li>
+                <li>IoT & Systèmes embarqués</li>
+                <li>Gestion de projet informatique</li>
+                <li>Stage professionnel (2 mois)</li>
+                <li class="module-highlight">Mémoire de fin de cycle</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASTER MPI -->
+    <div class="formation-card" style="margin-top:1.5rem;">
+      <div class="fc-header fc-header-master">
+        <div class="fc-niveau-badge">Master</div>
+        <h3 class="fc-titre">Master MPI — Spécialités innovantes</h3>
+      </div>
+      <div class="fc-meta-bar">
+        <span class="fc-meta-badge fc-meta-blue">📚 Niveau : Bac+5</span>
+        <span class="fc-meta-badge fc-meta-green">⏱ Durée : 2 ans</span>
+        <span class="fc-meta-badge fc-meta-grey">🎓 Prérequis : Licence MPI ou équivalent</span>
+      </div>
+      <div class="fc-visible-body">
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Spécialités disponibles</h4>
+          <div class="specialites-grid">
+            <div class="specialite-item">🤖 Big Data, IoT & Intelligence artificielle</div>
+            <div class="specialite-item">🔒 Cyber Security</div>
+            <div class="specialite-item">📐 Analyse numérique et modélisation</div>
+            <div class="specialite-item">🚀 Sciences et Technologies spatiales</div>
+            <div class="specialite-item">🦾 Robotique</div>
+            <div class="specialite-item">🧬 Bio-informatique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== MIASS ========== -->
+<section class="section formation-groupe reveal" id="miass" data-filiere="miass" style="background:#f5f5f5;">
+  <div class="container">
+    <div class="fg-header">
+      <div class="fg-dept-badge">Dépt. MIM</div>
+      <h2 class="section-title">Mathématiques Appliquées à la Vie Sociale</h2>
+      <span class="fg-sigle">MIASS</span>
+      <a href="{{ url_for('departements') }}#dim" class="retour-dept-link">← Retour au département MIM</a>
+    </div>
+
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-niveau-badge">Licence</div>
+        <h3 class="fc-titre">Licence MIASS — Mathématiques Appliquées aux Sciences Sociales</h3>
+      </div>
+      <div class="fc-meta-bar">
+        <span class="fc-meta-badge fc-meta-blue">📚 Niveau : Bac+3</span>
+        <span class="fc-meta-badge fc-meta-green">⏱ Durée : 3 ans</span>
+        <span class="fc-meta-badge fc-meta-grey">🎓 Admission : S1–S4, STEG</span>
+      </div>
+      <div class="fc-visible-body">
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Objectif</h4>
+          <p class="fc-section-texte">
+            Former des spécialistes dans les métiers de la finance, de l'économie et de
+            la gestion des organisations grâce à une maîtrise des mathématiques appliquées,
+            des statistiques et de la modélisation économique.
+          </p>
+        </div>
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Débouchés</h4>
+          <div class="debouches-tags">
+            <span class="debouche-tag">Actuariat & assurance</span>
+            <span class="debouche-tag">Analyste quantitatif</span>
+            <span class="debouche-tag">Finance quantitative</span>
+            <span class="debouche-tag">Marketing & modélisation</span>
+            <span class="debouche-tag">Banques</span>
+            <span class="debouche-tag">Entrepreneuriat</span>
+          </div>
+        </div>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          📋 Découvrir le programme complet
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="programme-grid">
+            <div class="semestre-block"><div class="sem-header">Semestre 1</div><ul class="sem-modules"><li>Analyse mathématique I</li><li>Algèbre linéaire</li><li>Informatique de base</li><li>Introduction à l'économie</li><li>Anglais & Communication</li></ul></div>
+            <div class="semestre-block"><div class="sem-header">Semestre 2</div><ul class="sem-modules"><li>Probabilités & Statistiques I</li><li>Analyse mathématique II</li><li>Microéconomie</li><li>Comptabilité générale</li><li>Programmation Python</li></ul></div>
+            <div class="semestre-block"><div class="sem-header">Semestre 3</div><ul class="sem-modules"><li>Statistiques II & Économétrie</li><li>Mathématiques financières</li><li>Macroéconomie</li><li>Gestion des organisations</li><li>Bases de données</li></ul></div>
+            <div class="semestre-block"><div class="sem-header">Semestre 4</div><ul class="sem-modules"><li>Actuariat fondamental</li><li>Recherche opérationnelle</li><li>Finance quantitative</li><li>Analyse de données (R/Python)</li><li>Projet encadré</li></ul></div>
+            <div class="semestre-block"><div class="sem-header">Semestre 5</div><ul class="sem-modules"><li>Modélisation stochastique</li><li>Gestion des risques</li><li>Marchés financiers</li><li>Audit & contrôle de gestion</li><li>Projet encadré II</li></ul></div>
+            <div class="semestre-block"><div class="sem-header sem-header-last">Semestre 6</div><ul class="sem-modules"><li>Big Data & Analyse prédictive</li><li>Entrepreneuriat</li><li>Stage professionnel (2 mois)</li><li class="module-highlight">Mémoire de fin de cycle</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SML ========== -->
+<section class="section formation-groupe reveal" id="sml" data-filiere="sml">
+  <div class="container">
+    <div class="fg-header">
+      <div class="fg-dept-badge fg-dept-badge-turquoise">Dépt. SMU</div>
+      <h2 class="section-title">Sciences de la Mer et du Littoral</h2>
+      <span class="fg-sigle fg-sigle-turquoise">SML</span>
+      <a href="{{ url_for('departements') }}#smu" class="retour-dept-link">← Retour au département SMU</a>
+    </div>
+
+    <div class="formation-card">
+      <div class="fc-header fc-header-turquoise">
+        <div class="fc-niveau-badge">Licence</div>
+        <h3 class="fc-titre">Licence SML — Sciences de la Mer et du Littoral</h3>
+      </div>
+      <div class="fc-meta-bar fc-meta-bar-turquoise">
+        <span class="fc-meta-badge fc-meta-blue">📚 Niveau : Bac+3</span>
+        <span class="fc-meta-badge fc-meta-green">⏱ Durée : 3 ans</span>
+        <span class="fc-meta-badge fc-meta-grey">🎓 Admission : S1, S1A, S2, S2A, S3, S4</span>
+      </div>
+      <div class="fc-visible-body">
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Objectif</h4>
+          <p class="fc-section-texte">
+            Offrir une formation de haut niveau pour les métiers de la protection du littoral,
+            de la gestion des ressources marines, de la biodiversité marine, de l'économie
+            bleue et de la résilience climatique des territoires côtiers.
+          </p>
+        </div>
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Débouchés</h4>
+          <div class="debouches-tags">
+            <span class="debouche-tag debouche-tag-turquoise">Ingénieur génie côtier</span>
+            <span class="debouche-tag debouche-tag-turquoise">Chercheur biologie marine</span>
+            <span class="debouche-tag debouche-tag-turquoise">Responsable aquaculture</span>
+            <span class="debouche-tag debouche-tag-turquoise">ONG & Aires Marines protégées</span>
+            <span class="debouche-tag debouche-tag-turquoise">Économie bleue & startups</span>
+          </div>
+        </div>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn accordion-btn-turquoise" onclick="toggleAccordion(this)">
+          📋 Découvrir le programme complet
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="programme-grid">
+            <div class="semestre-block"><div class="sem-header sem-header-turquoise">Semestre 1</div><ul class="sem-modules"><li>Océanographie physique I</li><li>Biologie marine I</li><li>Chimie des eaux</li><li>Mathématiques appliquées</li><li>Anglais scientifique</li></ul></div>
+            <div class="semestre-block"><div class="sem-header sem-header-turquoise">Semestre 2</div><ul class="sem-modules"><li>Océanographie physique II</li><li>Écologie marine</li><li>Géologie marine</li><li>Statistiques marines</li><li>SIG & Cartographie marine</li></ul></div>
+            <div class="semestre-block"><div class="sem-header sem-header-turquoise">Semestre 3</div><ul class="sem-modules"><li>Dynamique physique du littoral</li><li>Ressources halieutiques</li><li>Biochimie marine</li><li>Aquaculture I</li><li>Droit maritime</li></ul></div>
+            <div class="semestre-block"><div class="sem-header sem-header-turquoise">Semestre 4</div><ul class="sem-modules"><li>Génie côtier & portuaire</li><li>Gestion des écosystèmes côtiers</li><li>Aquaculture II</li><li>Climatologie marine</li><li>Projet de terrain</li></ul></div>
+            <div class="semestre-block"><div class="sem-header sem-header-turquoise">Semestre 5</div><ul class="sem-modules"><li>Économie bleue</li><li>Aménagement du littoral</li><li>Biodiversité & conservation</li><li>Changements climatiques</li><li>Projet encadré</li></ul></div>
+            <div class="semestre-block"><div class="sem-header sem-header-turquoise sem-header-last">Semestre 6</div><ul class="sem-modules"><li>Gestion durable des ressources</li><li>Entrepreneuriat & startup</li><li>Stage professionnel (2 mois)</li><li class="module-highlight">Mémoire de fin de cycle</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PHYSIQUE & APPLICATIONS ========== -->
+<section class="section formation-groupe reveal" id="pa" data-filiere="pa" style="background:#f5f5f5;">
+  <div class="container">
+    <div class="fg-header">
+      <div class="fg-dept-badge fg-dept-badge-turquoise">Dépt. SMU</div>
+      <h2 class="section-title">Physique et Applications</h2>
+      <span class="fg-sigle fg-sigle-turquoise">PA</span>
+      <a href="{{ url_for('departements') }}#smu" class="retour-dept-link">← Retour au département SMU</a>
+    </div>
+
+    <div class="formation-card">
+      <div class="fc-header fc-header-turquoise">
+        <div class="fc-niveau-badge">Licence / Master</div>
+        <h3 class="fc-titre">Physique et Applications</h3>
+      </div>
+      <div class="fc-meta-bar fc-meta-bar-turquoise">
+        <span class="fc-meta-badge fc-meta-blue">📚 Tronc commun S1–S3 avec MPI</span>
+        <span class="fc-meta-badge fc-meta-green">⏱ Spécialisation dès S4</span>
+        <span class="fc-meta-badge fc-meta-grey">🎓 Admission : S1, S1A, S2, S2A, S3, S4</span>
+      </div>
+      <div class="fc-visible-body">
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Secteurs clés</h4>
+          <div class="specialites-grid">
+            <div class="specialite-item specialite-item-turquoise">🧱 Matériaux & nanosciences</div>
+            <div class="specialite-item specialite-item-turquoise">⚡ Énergies renouvelables</div>
+            <div class="specialite-item specialite-item-turquoise">💧 Eau & environnement</div>
+            <div class="specialite-item specialite-item-turquoise">🛰️ Sciences spatiales</div>
+          </div>
+        </div>
+        <div class="fc-section">
+          <h4 class="fc-section-titre">Masters disponibles</h4>
+          <div class="specialites-grid">
+            <div class="specialite-item specialite-item-turquoise">Physique des matériaux & fluides</div>
+            <div class="specialite-item specialite-item-turquoise">Physique nucléaire & applications</div>
+            <div class="specialite-item specialite-item-turquoise">Transition énergétique & dév. durable</div>
+            <div class="specialite-item specialite-item-turquoise">Nanotechnologies & nanosciences</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TABLEAU ADMISSION ========== -->
+<section class="section admission-section">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">Critères d'admission par filière</h2>
+    <div class="table-wrapper">
+      <table class="admission-table">
+        <thead>
+          <tr>
+            <th>Filière</th>
+            <th>Sigle</th>
+            <th>Séries acceptées au Bac</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mathématiques, Physique et Informatique</td><td><span class="table-badge">MPI</span></td><td>S1, S1A, S2, S2A, S3, S4</td></tr>
+          <tr><td>Sciences de la Mer et du Littoral</td><td><span class="table-badge table-badge-turquoise">SML</span></td><td>S1, S1A, S2, S2A, S3, S4</td></tr>
+          <tr><td>Mathématiques Appliquées aux Sciences Sociales</td><td><span class="table-badge">MIASS</span></td><td>S1, S1A, S2, S2A, S3, S4, <strong>STEG</strong></td></tr>
+          <tr><td>Physique et Applications</td><td><span class="table-badge table-badge-turquoise">PA</span></td><td>S1, S1A, S2, S2A, S3, S4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section section">
+  <div class="container cta-inner">
+    <div>
+      <h2 class="cta-titre">Des questions sur nos formations ?</h2>
+      <p class="cta-desc">Notre équipe pédagogique est disponible pour vous accompagner.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="{{ url_for('contact') }}" class="btn btn-primaire">Nous contacter</a>
+      <a href="{{ url_for('departements') }}" class="btn btn-outline-marron">Voir les départements</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function filtrer(btn, filiere) {
+  document.querySelectorAll('.filtre-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filiere === filiere);
+  });
+
+  document.querySelectorAll('.formation-groupe').forEach(g => {
+    g.style.display = (filiere === 'tous' || g.dataset.filiere === filiere) ? 'block' : 'none';
+  });
+
+  if (filiere !== 'tous') {
+    const target = document.getElementById(filiere);
+    if (target) {
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
+}
+
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+
+  document.querySelectorAll('.accordion-content.open').forEach(openContent => {
+    if (openContent !== content) {
+      openContent.classList.remove('open');
+      openContent.previousElementSibling?.classList.remove('accordion-btn-open');
+    }
+  });
+
+  content.classList.toggle('open', !isOpen);
+  btn.classList.toggle('accordion-btn-open', !isOpen);
+}
+
+function applyHashFilter() {
+  const hash = window.location.hash.replace('#', '');
+  const valid = ['mpi', 'miass', 'sml', 'pa'];
+  if (valid.includes(hash)) {
+    filtrer(null, hash);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', applyHashFilter);
+</script>
+{% endblock %}
