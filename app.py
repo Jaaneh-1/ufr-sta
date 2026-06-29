@@ -1,6 +1,46 @@
 from flask import Flask, render_template
+import sqlite3
+import os
 
 app = Flask(__name__)
+
+DATABASE = 'database/ufr_sta.db'
+
+def get_db():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    os.makedirs('database', exist_ok=True)
+    conn = get_db()
+    conn.execute('''CREATE TABLE IF NOT EXISTS actualites (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titre TEXT NOT NULL,
+        date TEXT NOT NULL,
+        description TEXT NOT NULL,
+        photo TEXT
+    )''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS activites (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titre TEXT NOT NULL,
+        date TEXT NOT NULL,
+        lieu TEXT NOT NULL,
+        organisateur TEXT NOT NULL,
+        description TEXT NOT NULL
+    )''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS formations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nom TEXT NOT NULL,
+        niveau TEXT NOT NULL,
+        duree TEXT NOT NULL,
+        departement TEXT NOT NULL,
+        description TEXT NOT NULL
+    )''')
+    conn.commit()
+    conn.close()
+
+init_db()
 
 @app.route('/')
 def index():
