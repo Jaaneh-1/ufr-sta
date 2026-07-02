@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Contact — UFR STA{% endblock %}
+{% block content %}
+
+<header class="page-header">
+    <div class="container">
+        <div class="breadcrumb"><a href="{{ url_for('index') }}">Accueil</a> / Contact</div>
+        <h1>Contactez-nous</h1>
+        <p>Une question sur nos filières, nos départements ou un projet de
+           partenariat ? Écrivez-nous, notre équipe vous répond rapidement.</p>
+    </div>
+</header>
+
+<section class="section">
+    <div class="container contact-grid">
+        <div>
+            <h2 style="font-size: 1.3rem;">Nos coordonnées</h2>
+            <div class="contact-info-item">
+                <div class="contact-info-icon">📍</div>
+                <div>
+                    <div class="contact-info-label">Adresse</div>
+                    <div class="contact-info-value">Rue 21x20, 2ème Arrondissement,<br>Pôle Urbain de Diamniadio<br>BP : 45927 Dakar NAFA VDN, Sénégal</div>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <div class="contact-info-icon">✉️</div>
+                <div>
+                    <div class="contact-info-label">Email UFR STA</div>
+                    <div class="contact-info-value"><a href="mailto:directeur-ufrsta@uam.edu.sn">directeur-ufrsta@uam.edu.sn</a></div>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <div class="contact-info-icon">📞</div>
+                <div>
+                    <div class="contact-info-label">Téléphone UAM</div>
+                    <div class="contact-info-value">+221 33 844 10 00 / +221 33 867 30 92</div>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <div class="contact-info-icon">🕗</div>
+                <div>
+                    <div class="contact-info-label">Horaires</div>
+                    <div class="contact-info-value">08h00 - 17h00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <form method="POST" action="{{ url_for('contact') }}" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom">Nom complet</label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sujet">Sujet</label>
+                    <input type="text" id="sujet" name="sujet" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Envoyer le message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
