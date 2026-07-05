@@ -1126,3 +1126,300 @@ textarea { resize: vertical; min-height: 130px; }
     .form-row { grid-template-columns: 1fr; }
     .contact-header-titre { font-size: 2rem; }
 }
+
+
+
+/* BANNIÈRE SPLIT */
+.dept-banniere-split {
+    display: flex;
+    height: 420px;
+    overflow: hidden;
+}
+
+.dept-banniere-img-side {
+    width: 60%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.dept-banniere-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.dept-banniere-texte-side {
+    width: 40%;
+    background: #8B3A2A;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    color: #ffffff;
+}
+
+.dept-slide-eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #00A8B5;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.dept-slide-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.dept-slide-desc {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* DEPT CARDS */
+.dept-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 2rem;
+}
+
+.dept-big-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--ombre);
+}
+
+.dept-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem;
+}
+
+.dept-card-top-marron { background: #8B3A2A; color: #ffffff; }
+.dept-card-top-turquoise { background: #00A8B5; color: #ffffff; }
+
+.dept-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.dept-card-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.dept-card-sigle {
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: rgba(255,255,255,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.dept-card-sigle-turquoise { background: rgba(255,255,255,0.2); }
+
+.dept-card-icon { font-size: 2rem; text-align: right; }
+.dept-card-num { font-size: 3rem; font-weight: 700; opacity: 0.2; text-align: right; }
+
+.dept-card-cover {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.dept-card-body { padding: 1.5rem; background: #ffffff; }
+
+.dept-card-desc {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.dept-card-filieres { margin-bottom: 1.5rem; }
+
+.dept-card-filieres-titre {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8B3A2A;
+    margin-bottom: 0.75rem;
+}
+
+.dept-filiere-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.dept-filiere-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+.dept-filiere-link { color: #8B3A2A; font-weight: 600; }
+.dept-filiere-link:hover { color: #00A8B5; }
+
+.filiere-niveaux { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.niveau-tag {
+    background: #f5f5f5;
+    color: #555;
+    font-size: 0.72rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.dept-card-responsable {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: #f5f5f5;
+    border-radius: var(--radius);
+}
+
+.resp-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #8B3A2A;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.resp-avatar-turquoise { background: #00A8B5; }
+.resp-label { font-size: 0.75rem; color: #888; }
+.resp-nom { font-weight: 700; color: #333; font-size: 0.9rem; }
+
+.dept-card-contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* LABO */
+.labo-inner {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.labo-texte { flex: 1; }
+.labo-desc { color: #555; margin: 1rem 0 1.5rem; line-height: 1.7; }
+
+.equipes-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.equipe-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #ffffff;
+    border-radius: var(--radius);
+    box-shadow: var(--ombre);
+    font-size: 0.9rem;
+}
+
+.equipe-sigle {
+    background: #8B3A2A;
+    color: #ffffff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.equipe-sigle-turquoise { background: #00A8B5; }
+
+.labo-stat-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 200px;
+}
+
+.labo-stat { text-align: center; }
+
+.labo-nb {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #8B3A2A;
+    line-height: 1;
+}
+
+.labo-label { font-size: 0.85rem; color: #666; }
+
+/* CTA */
+.cta-section { background: #8B3A2A; }
+
+.cta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.cta-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.cta-desc { color: rgba(255,255,255,0.8); }
+
+.cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-outline-marron {
+    background: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-block;
+    transition: background 0.2s;
+}
+
+.btn-outline-marron:hover { background: rgba(255,255,255,0.15); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .dept-banniere-split { flex-direction: column; height: auto; }
+    .dept-banniere-img-side { width: 100%; height: 220px; }
+    .dept-banniere-texte-side { width: 100%; padding: 2rem 1.5rem; }
+    .dept-slide-titre { font-size: 1.6rem; }
+    .dept-cards-grid { grid-template-columns: 1fr; }
+    .labo-inner { flex-direction: column; }
+    .cta-inner { flex-direction: column; text-align: center; }
+}

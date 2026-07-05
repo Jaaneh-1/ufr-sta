@@ -3,12 +3,18 @@
 
 {% block content %}
 
-<!-- ========== HERO ========== -->
-<section class="page-hero">
-  <div class="container page-hero-inner">
-    <p class="hero-eyebrow">Organisation académique</p>
-    <h1 class="page-hero-titre">Nos Départements</h1>
-    <p class="page-hero-desc">
+<!-- ========== BANNIÈRE SPLIT ========== -->
+<section class="dept-banniere-split">
+  <div class="dept-banniere-img-side">
+    <img src="{{ url_for('static', filename='images/banniere_dept.jpg') }}" 
+         alt="Départements UFR STA" 
+         class="dept-banniere-photo"
+         onerror="this.style.display='none'">
+  </div>
+  <div class="dept-banniere-texte-side">
+    <p class="dept-slide-eyebrow">Organisation académique</p>
+    <h1 class="dept-slide-titre">Nos Départements</h1>
+    <p class="dept-slide-desc">
       L'UFR STA ambitionne d'être un hub scientifique, technologique et d'innovation
       de référence en Afrique, au service du développement socio-économique du Sénégal.
     </p>
@@ -16,15 +22,14 @@
 </section>
 
 <!-- ========== INTRO VISION ========== -->
-<section class="section reveal" style="padding-bottom:0;">
+<section class="section" style="padding-bottom:0;">
   <div class="container">
-    <div class="intro-block reveal">
+    <div class="intro-block">
       <p class="intro-text">
         L'UFR Sciences et Technologies Avancées de l'UAM est organisée autour de
         <strong>deux départements complémentaires</strong>. Chacun propose des formations
         innovantes dans le cadre d'un modèle pédagogique intégré qui allie formation
-        professionnelle et formation par la recherche, conformément aux recommandations
-        de la CNAES.
+        professionnelle et formation par la recherche.
       </p>
     </div>
   </div>
@@ -36,7 +41,7 @@
     <div class="dept-cards-grid">
 
       <!-- CARTE 1 : MIM -->
-      <div class="dept-big-card reveal" id="dim">
+      <div class="dept-big-card" id="dim">
         <div class="dept-card-top dept-card-top-marron">
           <div class="dept-card-top-left">
             <span class="dept-eyebrow">Département</span>
@@ -99,10 +104,10 @@
       </div>
 
       <!-- CARTE 2 : SMU -->
-      <div class="dept-big-card reveal" id="smu">
+      <div class="dept-big-card" id="smu">
         <div class="dept-card-top dept-card-top-turquoise">
           <div class="dept-card-top-left">
-            <span class="dept-eyebrow dept-eyebrow-turquoise dept-eyebrow-marron">Département</span>
+            <span class="dept-eyebrow">Département</span>
             <h2 class="dept-card-titre">Sciences de la Matière et de l'Univers</h2>
             <span class="dept-card-sigle dept-card-sigle-turquoise">SMU</span>
           </div>
@@ -154,7 +159,7 @@
 
           <div class="dept-card-contact">
             <span>📍 Bâtiment B — UFR STA</span>
-            <a href="mailto:smu@ufrsta.uam.edu.sn" class="btn btn-turquoise" style="font-size:0.85rem; padding:0.5rem 1rem;">
+            <a href="mailto:smu@ufrsta.uam.edu.sn" class="btn btn-primaire" style="font-size:0.85rem; padding:0.5rem 1rem;">
               ✉️ Contacter le département
             </a>
           </div>
@@ -166,7 +171,7 @@
 </section>
 
 <!-- ========== LABORATOIRE CMED ========== -->
-<section class="section labo-section reveal">
+<section class="section labo-section" style="background:#f5f5f5;">
   <div class="container">
     <div class="labo-inner">
       <div class="labo-texte">
@@ -202,7 +207,7 @@
 </section>
 
 <!-- ========== CTA ========== -->
-<section class="cta-section section reveal">
+<section class="cta-section section">
   <div class="container cta-inner">
     <div>
       <h2 class="cta-titre">Intéressé par nos formations ?</h2>
@@ -215,4 +220,26 @@
   </div>
 </section>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.dept-slide');
+const dots = document.querySelectorAll('.dept-dot');
+
+function goToSlide(n) {
+    if(slides.length === 0) return;
+    slides[current].classList.remove('active');
+    if(dots.length > 0) dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    if(dots.length > 0) dots[current].classList.add('active');
+}
+
+function nextSlide() { if(slides.length > 0) goToSlide((current + 1) % slides.length); }
+function prevSlide() { if(slides.length > 0) goToSlide((current - 1 + slides.length) % slides.length); }
+
+if(slides.length > 0) setInterval(nextSlide, 4000);
+</script>
 {% endblock %}
