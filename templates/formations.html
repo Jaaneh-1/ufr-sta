@@ -3,12 +3,18 @@
 
 {% block content %}
 
-<!-- ========== HERO ========== -->
-<section class="page-hero">
-  <div class="container page-hero-inner">
-    <p class="hero-eyebrow">Offre pédagogique</p>
-    <h1 class="page-hero-titre">Nos Formations</h1>
-    <p class="page-hero-desc">
+<!-- ========== BANNIÈRE FORMATIONS ========== -->
+<section class="dept-banniere-split">
+  <div class="dept-banniere-img-side">
+    <img src="{{ url_for('static', filename='images/banniere_form.jpg') }}" 
+         alt="Formations UFR STA" 
+         class="dept-banniere-photo"
+         onerror="this.style.display='none'">
+  </div>
+  <div class="dept-banniere-texte-side">
+    <p class="dept-slide-eyebrow">Offre pédagogique</p>
+    <h1 class="dept-slide-titre">Nos Formations</h1>
+    <p class="dept-slide-desc">
       Licence, Master et Doctorat dans les domaines des STEMS — alignés sur les
       besoins du marché de l'emploi sénégalais et africain.
     </p>
@@ -29,9 +35,8 @@
 </section>
 
 <!-- ========== MPI ========== -->
-<section class="section formation-groupe reveal" id="mpi" data-filiere="mpi">
+<section class="section formation-groupe" id="mpi" data-filiere="mpi">
   <div class="container">
-
     <div class="fg-header">
       <div class="fg-dept-badge">Dépt. MIM</div>
       <h2 class="section-title">Mathématiques, Physique et Informatique</h2>
@@ -39,7 +44,6 @@
       <a href="{{ url_for('departements') }}#dim" class="retour-dept-link">← Retour au département MIM</a>
     </div>
 
-    <!-- LICENCE MPI -->
     <div class="formation-card">
       <div class="fc-header">
         <div class="fc-niveau-badge">Licence</div>
@@ -71,8 +75,6 @@
           </div>
         </div>
       </div>
-
-      <!-- ACCORDÉON PROGRAMME -->
       <div class="accordion">
         <button class="accordion-btn" onclick="toggleAccordion(this)">
           📋 Découvrir le programme complet
@@ -150,7 +152,6 @@
       </div>
     </div>
 
-    <!-- MASTER MPI -->
     <div class="formation-card" style="margin-top:1.5rem;">
       <div class="fc-header fc-header-master">
         <div class="fc-niveau-badge">Master</div>
@@ -175,12 +176,11 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- ========== MIASS ========== -->
-<section class="section formation-groupe reveal" id="miass" data-filiere="miass" style="background:#f5f5f5;">
+<section class="section formation-groupe" id="miass" data-filiere="miass" style="background:#f5f5f5;">
   <div class="container">
     <div class="fg-header">
       <div class="fg-dept-badge">Dépt. MIM</div>
@@ -188,7 +188,6 @@
       <span class="fg-sigle">MIASS</span>
       <a href="{{ url_for('departements') }}#dim" class="retour-dept-link">← Retour au département MIM</a>
     </div>
-
     <div class="formation-card">
       <div class="fc-header">
         <div class="fc-niveau-badge">Licence</div>
@@ -241,7 +240,7 @@
 </section>
 
 <!-- ========== SML ========== -->
-<section class="section formation-groupe reveal" id="sml" data-filiere="sml">
+<section class="section formation-groupe" id="sml" data-filiere="sml">
   <div class="container">
     <div class="fg-header">
       <div class="fg-dept-badge fg-dept-badge-turquoise">Dépt. SMU</div>
@@ -249,13 +248,12 @@
       <span class="fg-sigle fg-sigle-turquoise">SML</span>
       <a href="{{ url_for('departements') }}#smu" class="retour-dept-link">← Retour au département SMU</a>
     </div>
-
     <div class="formation-card">
       <div class="fc-header fc-header-turquoise">
         <div class="fc-niveau-badge">Licence</div>
         <h3 class="fc-titre">Licence SML — Sciences de la Mer et du Littoral</h3>
       </div>
-      <div class="fc-meta-bar fc-meta-bar-turquoise">
+      <div class="fc-meta-bar">
         <span class="fc-meta-badge fc-meta-blue">📚 Niveau : Bac+3</span>
         <span class="fc-meta-badge fc-meta-green">⏱ Durée : 3 ans</span>
         <span class="fc-meta-badge fc-meta-grey">🎓 Admission : S1, S1A, S2, S2A, S3, S4</span>
@@ -265,8 +263,7 @@
           <h4 class="fc-section-titre">Objectif</h4>
           <p class="fc-section-texte">
             Offrir une formation de haut niveau pour les métiers de la protection du littoral,
-            de la gestion des ressources marines, de la biodiversité marine, de l'économie
-            bleue et de la résilience climatique des territoires côtiers.
+            de la gestion des ressources marines et de la biodiversité marine.
           </p>
         </div>
         <div class="fc-section">
@@ -301,7 +298,7 @@
 </section>
 
 <!-- ========== PHYSIQUE & APPLICATIONS ========== -->
-<section class="section formation-groupe reveal" id="pa" data-filiere="pa" style="background:#f5f5f5;">
+<section class="section formation-groupe" id="pa" data-filiere="pa" style="background:#f5f5f5;">
   <div class="container">
     <div class="fg-header">
       <div class="fg-dept-badge fg-dept-badge-turquoise">Dépt. SMU</div>
@@ -309,13 +306,12 @@
       <span class="fg-sigle fg-sigle-turquoise">PA</span>
       <a href="{{ url_for('departements') }}#smu" class="retour-dept-link">← Retour au département SMU</a>
     </div>
-
     <div class="formation-card">
       <div class="fc-header fc-header-turquoise">
         <div class="fc-niveau-badge">Licence / Master</div>
         <h3 class="fc-titre">Physique et Applications</h3>
       </div>
-      <div class="fc-meta-bar fc-meta-bar-turquoise">
+      <div class="fc-meta-bar">
         <span class="fc-meta-badge fc-meta-blue">📚 Tronc commun S1–S3 avec MPI</span>
         <span class="fc-meta-badge fc-meta-green">⏱ Spécialisation dès S4</span>
         <span class="fc-meta-badge fc-meta-grey">🎓 Admission : S1, S1A, S2, S2A, S3, S4</span>
@@ -328,15 +324,6 @@
             <div class="specialite-item specialite-item-turquoise">⚡ Énergies renouvelables</div>
             <div class="specialite-item specialite-item-turquoise">💧 Eau & environnement</div>
             <div class="specialite-item specialite-item-turquoise">🛰️ Sciences spatiales</div>
-          </div>
-        </div>
-        <div class="fc-section">
-          <h4 class="fc-section-titre">Masters disponibles</h4>
-          <div class="specialites-grid">
-            <div class="specialite-item specialite-item-turquoise">Physique des matériaux & fluides</div>
-            <div class="specialite-item specialite-item-turquoise">Physique nucléaire & applications</div>
-            <div class="specialite-item specialite-item-turquoise">Transition énergétique & dév. durable</div>
-            <div class="specialite-item specialite-item-turquoise">Nanotechnologies & nanosciences</div>
           </div>
         </div>
       </div>
@@ -360,7 +347,7 @@
         <tbody>
           <tr><td>Mathématiques, Physique et Informatique</td><td><span class="table-badge">MPI</span></td><td>S1, S1A, S2, S2A, S3, S4</td></tr>
           <tr><td>Sciences de la Mer et du Littoral</td><td><span class="table-badge table-badge-turquoise">SML</span></td><td>S1, S1A, S2, S2A, S3, S4</td></tr>
-          <tr><td>Mathématiques Appliquées aux Sciences Sociales</td><td><span class="table-badge">MIASS</span></td><td>S1, S1A, S2, S2A, S3, S4, <strong>STEG</strong></td></tr>
+          <tr><td>Mathématiques Appliquées aux Sciences Sociales</td><td><span class="table-badge">MIASS</span></td><td>S1, S1A, S2, S2A, S3, S4, STEG</td></tr>
           <tr><td>Physique et Applications</td><td><span class="table-badge table-badge-turquoise">PA</span></td><td>S1, S1A, S2, S2A, S3, S4</td></tr>
         </tbody>
       </table>
@@ -390,42 +377,32 @@ function filtrer(btn, filiere) {
   document.querySelectorAll('.filtre-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.filiere === filiere);
   });
-
   document.querySelectorAll('.formation-groupe').forEach(g => {
     g.style.display = (filiere === 'tous' || g.dataset.filiere === filiere) ? 'block' : 'none';
   });
-
   if (filiere !== 'tous') {
     const target = document.getElementById(filiere);
-    if (target) {
-      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
+    if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
 }
 
 function toggleAccordion(btn) {
   const content = btn.nextElementSibling;
   const isOpen = content.classList.contains('open');
-
-  document.querySelectorAll('.accordion-content.open').forEach(openContent => {
-    if (openContent !== content) {
-      openContent.classList.remove('open');
-      openContent.previousElementSibling?.classList.remove('accordion-btn-open');
+  document.querySelectorAll('.accordion-content.open').forEach(c => {
+    if (c !== content) {
+      c.classList.remove('open');
+      c.previousElementSibling?.classList.remove('accordion-btn-open');
     }
   });
-
   content.classList.toggle('open', !isOpen);
   btn.classList.toggle('accordion-btn-open', !isOpen);
 }
 
-function applyHashFilter() {
+window.addEventListener('DOMContentLoaded', () => {
   const hash = window.location.hash.replace('#', '');
   const valid = ['mpi', 'miass', 'sml', 'pa'];
-  if (valid.includes(hash)) {
-    filtrer(null, hash);
-  }
-}
-
-window.addEventListener('DOMContentLoaded', applyHashFilter);
+  if (valid.includes(hash)) filtrer(null, hash);
+});
 </script>
 {% endblock %}
