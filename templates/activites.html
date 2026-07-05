@@ -1,29 +1,34 @@
-
 {% extends "base.html" %}
 {% block title %}Activités — UFR STA{% endblock %}
 {% block content %}
 
-<header class="page-header">
-    <div class="container">
-        <div class="breadcrumb"><a href="{{ url_for('index') }}">Accueil</a> / Activités</div>
-        <h1>Journal des activités</h1>
-        <p>Visites, conférences, ateliers, formations, compétitions et
-           sorties pédagogiques organisées par l'UFR STA. Cliquez sur une
-           activité pour voir le détail et les photos.</p>
-    </div>
-</header>
+<!-- ========== BANNIÈRE ACTIVITÉS ========== -->
+<section class="dept-banniere-split">
+  <div class="dept-banniere-img-side">
+    <img src="{{ url_for('static', filename='images/banniere_activites.jpg') }}" 
+         alt="Activités UFR STA" 
+         class="dept-banniere-photo"
+         onerror="this.style.display='none'">
+  </div>
+  <div class="dept-banniere-texte-side">
+    <p class="dept-slide-eyebrow">Vie estudiantine</p>
+    <h1 class="dept-slide-titre">Journal des Activités</h1>
+    <p class="dept-slide-desc">
+      Visites, conférences, ateliers, formations, compétitions et
+      sorties pédagogiques organisées par l'UFR STA.
+    </p>
+  </div>
+</section>
 
 <section class="section">
     <div class="container" style="max-width: 820px;">
 
-        <!-- Barre de recherche et filtres -->
         <div class="filter-bar" role="search" aria-label="Filtrer les activités">
             <input type="search"
                    id="activite-search"
                    placeholder="Rechercher une activité..."
                    aria-label="Rechercher une activité"
                    autocomplete="off">
-
             <div class="filter-buttons" role="group" aria-label="Filtrer par catégorie">
                 <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">Toutes</button>
                 <button type="button" class="filter-btn" data-filter="Formation" aria-pressed="false">Formation</button>
@@ -35,14 +40,14 @@
 
         <div id="activite-list">
 
-            <!-- Activité 1 -->
             <details class="accordion-item" id="activite-1"
                       data-category="Formation"
-                      data-search="séance de travaux pratiques en salle informatique 08 avril 2026 salle informatique ufr sta">
+                      data-search="séance de travaux pratiques en salle informatique 08 avril 2026">
                 <summary class="accordion-summary">
                     <div class="accordion-summary-main">
-                        <img class="accordion-thumb" loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/salle_informatique.jpg') }}" alt="">
+                        <img class="accordion-thumb" loading="lazy"
+                             src="{{ url_for('static', filename='images/inf.jpg') }}" alt=""
+                             onerror="this.style.display='none'">
                         <div class="accordion-title-block">
                             <span class="card-eyebrow">Formation</span>
                             <h3 class="accordion-title">Séance de travaux pratiques en salle informatique</h3>
@@ -54,34 +59,32 @@
                     <div class="accordion-chevron" aria-hidden="true">⌄</div>
                 </summary>
                 <div class="accordion-body">
-                    <div class="info-list" style="margin-bottom: 18px;">
+                    <div class="info-list" style="margin-bottom:18px;">
                         <div class="info-item">
                             <div class="info-label">Organisateur</div>
-                            <div class="info-value">Département Mathématiques, Informatique et Modélisation</div>
+                            <div class="info-value">Département MIM</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Lieu</div>
                             <div class="info-value">Salle informatique, UFR STA</div>
                         </div>
                     </div>
-                    <p>Séance de travaux pratiques pour les étudiants de la filière MPI, dans la salle informatique équipée de l'UFR STA.</p>
-                    <h4 style="margin-top: 22px; font-size: 0.95rem; color: var(--color-primary);">Galerie photos</h4>
+                    <p>Séance de travaux pratiques pour les étudiants de la filière MPI.</p>
                     <div class="detail-photo-grid">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/salle_informatique.jpg') }}"
-                             alt="TP Informatique" onerror="handleImgError(this)">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/inf.jpg') }}"
+                             alt="TP Informatique" onerror="this.style.display='none'">
                     </div>
                 </div>
             </details>
 
-            <!-- Activité 2 -->
             <details class="accordion-item" id="activite-2"
                       data-category="Formation"
-                      data-search="travaux dirigés de physique optique 12 mars 2026 salle de travaux pratiques ufr sta">
+                      data-search="travaux dirigés de physique optique 12 mars 2026">
                 <summary class="accordion-summary">
                     <div class="accordion-summary-main">
-                        <img class="accordion-thumb" loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/td_physique.jpg') }}" alt="">
+                        <img class="accordion-thumb" loading="lazy"
+                             src="{{ url_for('static', filename='images/physique.jpg') }}" alt=""
+                             onerror="this.style.display='none'">
                         <div class="accordion-title-block">
                             <span class="card-eyebrow">Formation</span>
                             <h3 class="accordion-title">Travaux dirigés de physique — Optique</h3>
@@ -93,34 +96,32 @@
                     <div class="accordion-chevron" aria-hidden="true">⌄</div>
                 </summary>
                 <div class="accordion-body">
-                    <div class="info-list" style="margin-bottom: 18px;">
+                    <div class="info-list" style="margin-bottom:18px;">
                         <div class="info-item">
                             <div class="info-label">Organisateur</div>
-                            <div class="info-value">Département Sciences de la Matière et de l'Univers</div>
+                            <div class="info-value">Département SMU</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Lieu</div>
                             <div class="info-value">Salle de travaux pratiques, UFR STA</div>
                         </div>
                     </div>
-                    <p>Séance de travaux dirigés de physique consacrée à l'optique géométrique, réunissant les étudiants de la filière Physique et Applications autour d'un dispositif expérimental.</p>
-                    <h4 style="margin-top: 22px; font-size: 0.95rem; color: var(--color-primary);">Galerie photos</h4>
+                    <p>Séance de travaux dirigés de physique consacrée à l'optique géométrique.</p>
                     <div class="detail-photo-grid">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/td_physique.jpg') }}"
-                             alt="TD Physique Optique" onerror="handleImgError(this)">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/physique.jpg') }}"
+                             alt="TD Physique" onerror="this.style.display='none'">
                     </div>
                 </div>
             </details>
 
-            <!-- Activité 3 -->
             <details class="accordion-item" id="activite-3"
                       data-category="Compétition"
-                      data-search="finale inter-départementale des 72h de l'uam 20 mars 2026 stade couvert de l'uam diamniadio">
+                      data-search="finale inter-départementale des 72h de l'uam 20 mars 2026">
                 <summary class="accordion-summary">
                     <div class="accordion-summary-main">
-                        <img class="accordion-thumb" loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/finale_72h_uam.jpg') }}" alt="">
+                        <img class="accordion-thumb" loading="lazy"
+                             src="{{ url_for('static', filename='images/foot.jpg') }}" alt=""
+                             onerror="this.style.display='none'">
                         <div class="accordion-title-block">
                             <span class="card-eyebrow">Compétition</span>
                             <h3 class="accordion-title">Finale Inter-départementale des 72h de l'UAM</h3>
@@ -132,7 +133,7 @@
                     <div class="accordion-chevron" aria-hidden="true">⌄</div>
                 </summary>
                 <div class="accordion-body">
-                    <div class="info-list" style="margin-bottom: 18px;">
+                    <div class="info-list" style="margin-bottom:18px;">
                         <div class="info-item">
                             <div class="info-label">Organisateur</div>
                             <div class="info-value">Bureau des étudiants / CROUS</div>
@@ -142,27 +143,22 @@
                             <div class="info-value">Stade couvert de l'UAM, Diamniadio</div>
                         </div>
                     </div>
-                    <p>L'équipe de l'UFR STA a remporté la finale inter-départementale des « 72h de l'UAM », une compétition sportive et culturelle réunissant l'ensemble des UFR de l'université.</p>
-                    <h4 style="margin-top: 22px; font-size: 0.95rem; color: var(--color-primary);">Galerie photos</h4>
+                    <p>L'équipe de l'UFR STA a remporté la finale inter-départementale des 72h de l'UAM.</p>
                     <div class="detail-photo-grid">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/finale_72h_uam.jpg') }}"
-                             alt="Finale 72h UAM" onerror="handleImgError(this)">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/certificats_72h.jpg') }}"
-                             alt="Remise des certificats" onerror="handleImgError(this)">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/foot.jpg') }}"
+                             alt="Finale 72h UAM" onerror="this.style.display='none'">
                     </div>
                 </div>
             </details>
 
-            <!-- Activité 4 -->
             <details class="accordion-item" id="activite-4"
                       data-category="Visite"
-                      data-search="visite de chantier plateforme etis 20 février 2026 site partenaire diamniadio">
+                      data-search="visite de chantier plateforme etis 20 février 2026">
                 <summary class="accordion-summary">
                     <div class="accordion-summary-main">
-                        <img class="accordion-thumb" loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/brochure_service_communaute.jpg') }}" alt="">
+                        <img class="accordion-thumb" loading="lazy"
+                             src="{{ url_for('static', filename='images/sta.jpg') }}" alt=""
+                             onerror="this.style.display='none'">
                         <div class="accordion-title-block">
                             <span class="card-eyebrow">Visite</span>
                             <h3 class="accordion-title">Visite de chantier — Plateforme ETIS</h3>
@@ -174,34 +170,32 @@
                     <div class="accordion-chevron" aria-hidden="true">⌄</div>
                 </summary>
                 <div class="accordion-body">
-                    <div class="info-list" style="margin-bottom: 18px;">
+                    <div class="info-list" style="margin-bottom:18px;">
                         <div class="info-item">
                             <div class="info-label">Organisateur</div>
-                            <div class="info-value">Plateforme ETIS — Expertise Territoriale In Situ</div>
+                            <div class="info-value">Plateforme ETIS</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Lieu</div>
                             <div class="info-value">Site partenaire, Diamniadio</div>
                         </div>
                     </div>
-                    <p>Dans le cadre de la plateforme de service à la communauté ETIS, des étudiants de l'UFR STA ont participé à une visite de chantier encadrée, confrontant les enseignements académiques aux réalités du terrain.</p>
-                    <h4 style="margin-top: 22px; font-size: 0.95rem; color: var(--color-primary);">Galerie photos</h4>
+                    <p>Des étudiants de l'UFR STA ont participé à une visite de chantier encadrée.</p>
                     <div class="detail-photo-grid">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/brochure_service_communaute.jpg') }}"
-                             alt="Visite ETIS" onerror="handleImgError(this)">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/sta.jpg') }}"
+                             alt="Visite ETIS" onerror="this.style.display='none'">
                     </div>
                 </div>
             </details>
 
-            <!-- Activité 5 -->
             <details class="accordion-item" id="activite-5"
                       data-category="Sortie pédagogique"
-                      data-search="sortie pédagogique sciences de la mer et du littoral 10 février 2026 littoral sénégalais">
+                      data-search="sortie pédagogique sciences de la mer et du littoral 10 février 2026">
                 <summary class="accordion-summary">
                     <div class="accordion-summary-main">
-                        <img class="accordion-thumb" loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/filiere_sml.jpg') }}" alt="">
+                        <img class="accordion-thumb" loading="lazy"
+                             src="{{ url_for('static', filename='images/sml.jpg') }}" alt=""
+                             onerror="this.style.display='none'">
                         <div class="accordion-title-block">
                             <span class="card-eyebrow">Sortie pédagogique</span>
                             <h3 class="accordion-title">Sortie pédagogique — Sciences de la Mer et du Littoral</h3>
@@ -213,34 +207,32 @@
                     <div class="accordion-chevron" aria-hidden="true">⌄</div>
                 </summary>
                 <div class="accordion-body">
-                    <div class="info-list" style="margin-bottom: 18px;">
+                    <div class="info-list" style="margin-bottom:18px;">
                         <div class="info-item">
                             <div class="info-label">Organisateur</div>
-                            <div class="info-value">Département Sciences de la Matière et de l'Univers</div>
+                            <div class="info-value">Département SMU</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Lieu</div>
                             <div class="info-value">Littoral sénégalais</div>
                         </div>
                     </div>
-                    <p>Sortie en mer organisée pour les étudiants de la filière Sciences de la Mer et du Littoral (SML), en partenariat avec ICD Afrique, pour une initiation aux activités d'observation et de relevés côtiers.</p>
-                    <h4 style="margin-top: 22px; font-size: 0.95rem; color: var(--color-primary);">Galerie photos</h4>
+                    <p>Sortie en mer pour les étudiants de la filière SML, en partenariat avec ICD Afrique.</p>
                     <div class="detail-photo-grid">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/filiere_sml.jpg') }}"
-                             alt="Sortie SML" onerror="handleImgError(this)">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/sml.jpg') }}"
+                             alt="Sortie SML" onerror="this.style.display='none'">
                     </div>
                 </div>
             </details>
 
-            <!-- Activité 6 -->
             <details class="accordion-item" id="activite-6"
                       data-category="Visite"
-                      data-search="visite découverte du campus pour les nouveaux bacheliers 15 janvier 2026 campus de l'uam diamniadio">
+                      data-search="visite découverte du campus pour les nouveaux bacheliers 15 janvier 2026">
                 <summary class="accordion-summary">
                     <div class="accordion-summary-main">
-                        <img class="accordion-thumb" loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/groupe_etudiants_uam.jpg') }}" alt="">
+                        <img class="accordion-thumb" loading="lazy"
+                             src="{{ url_for('static', filename='images/l3inf.jpg') }}" alt=""
+                             onerror="this.style.display='none'">
                         <div class="accordion-title-block">
                             <span class="card-eyebrow">Visite</span>
                             <h3 class="accordion-title">Visite découverte du campus pour les nouveaux bacheliers</h3>
@@ -252,7 +244,7 @@
                     <div class="accordion-chevron" aria-hidden="true">⌄</div>
                 </summary>
                 <div class="accordion-body">
-                    <div class="info-list" style="margin-bottom: 18px;">
+                    <div class="info-list" style="margin-bottom:18px;">
                         <div class="info-item">
                             <div class="info-label">Organisateur</div>
                             <div class="info-value">UFR STA</div>
@@ -262,15 +254,10 @@
                             <div class="info-value">Campus de l'UAM, Diamniadio</div>
                         </div>
                     </div>
-                    <p>Accueil et visite guidée du campus de l'UAM pour les nouveaux étudiants admis à l'UFR STA, autour de la citation du Pr Amadou Mahtar Mbow : « On ne peut pas accéder à une chose supérieure, si on n'a pas le savoir nécessaire et le savoir s'acquiert en apprenant ».</p>
-                    <h4 style="margin-top: 22px; font-size: 0.95rem; color: var(--color-primary);">Galerie photos</h4>
+                    <p>Accueil et visite guidée du campus de l'UAM pour les nouveaux étudiants admis à l'UFR STA.</p>
                     <div class="detail-photo-grid">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/groupe_etudiants_uam.jpg') }}"
-                             alt="Visite campus" onerror="handleImgError(this)">
-                        <img loading="lazy" decoding="async"
-                             src="{{ url_for('static', filename='images/amphi_etudiants.jpg') }}"
-                             alt="Amphithéâtre UAM" onerror="handleImgError(this)">
+                        <img loading="lazy" src="{{ url_for('static', filename='images/l3inf.jpg') }}"
+                             alt="Visite campus" onerror="this.style.display='none'">
                     </div>
                 </div>
             </details>
@@ -282,36 +269,9 @@
     </div>
 </section>
 
-<!-- Données structurées SEO -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "itemListElement": [
-    {"@type": "Event", "position": 1, "name": "Séance de travaux pratiques en salle informatique", "startDate": "2026-04-08", "location": {"@type": "Place", "name": "Salle informatique, UFR STA"}},
-    {"@type": "Event", "position": 2, "name": "Travaux dirigés de physique — Optique", "startDate": "2026-03-12", "location": {"@type": "Place", "name": "Salle de travaux pratiques, UFR STA"}},
-    {"@type": "Event", "position": 3, "name": "Finale Inter-départementale des 72h de l'UAM", "startDate": "2026-03-20", "location": {"@type": "Place", "name": "Stade couvert de l'UAM, Diamniadio"}},
-    {"@type": "Event", "position": 4, "name": "Visite de chantier — Plateforme ETIS", "startDate": "2026-02-20", "location": {"@type": "Place", "name": "Site partenaire, Diamniadio"}},
-    {"@type": "Event", "position": 5, "name": "Sortie pédagogique — Sciences de la Mer et du Littoral", "startDate": "2026-02-10", "location": {"@type": "Place", "name": "Littoral sénégalais"}},
-    {"@type": "Event", "position": 6, "name": "Visite découverte du campus pour les nouveaux bacheliers", "startDate": "2026-01-15", "location": {"@type": "Place", "name": "Campus de l'UAM, Diamniadio"}}
-  ]
-}
-</script>
-
 <script>
 (function () {
     "use strict";
-
-    // Fallback si une image est manquante
-    window.handleImgError = function (img) {
-        var grid = img.closest(".detail-photo-grid");
-        if (grid) {
-            img.style.display = "none";
-        } else {
-            img.style.display = "none";
-        }
-    };
-
     var items = Array.prototype.slice.call(document.querySelectorAll("#activite-list .accordion-item"));
     var searchInput = document.getElementById("activite-search");
     var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".filter-btn"));
@@ -321,7 +281,6 @@
     function applyFilters() {
         var query = (searchInput.value || "").trim().toLowerCase();
         var visibleCount = 0;
-
         items.forEach(function (item) {
             var matchesCategory = activeFilter === "all" || item.dataset.category === activeFilter;
             var matchesSearch = !query || (item.dataset.search || "").includes(query);
@@ -329,7 +288,6 @@
             item.hidden = !show;
             if (show) visibleCount++;
         });
-
         emptyMsg.hidden = visibleCount !== 0;
     }
 
@@ -342,28 +300,14 @@
         });
     });
 
-    if (searchInput) {
-        searchInput.addEventListener("input", applyFilters);
-    }
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
 
-    // Ouverture automatique via l'ancre (#activite-3) + accessibilité aria-expanded
     document.querySelectorAll("#activite-list details").forEach(function (details) {
         details.addEventListener("toggle", function () {
             var summary = details.querySelector("summary");
             if (summary) summary.setAttribute("aria-expanded", details.open ? "true" : "false");
         });
     });
-
-    if (window.location.hash) {
-        var target = document.querySelector(window.location.hash);
-        if (target && target.tagName === "DETAILS") {
-            target.open = true;
-            target.hidden = false;
-            setTimeout(function () {
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 50);
-        }
-    }
 })();
 </script>
 
