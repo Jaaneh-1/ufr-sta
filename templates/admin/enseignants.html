@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Admin Enseignants — UFR STA{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h2 class="section-title" style="margin-bottom:0;">Gestion des Enseignants</h2>
+      <a href="{{ url_for('admin') }}" class="btn btn-outline" style="border-color:#8B3A2A; color:#8B3A2A;">← Retour</a>
+    </div>
+
+    <div class="admin-form-card">
+      <h3 class="admin-form-titre">Ajouter un enseignant</h3>
+      <form action="{{ url_for('ajouter_enseignant') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input type="text" name="nom" class="form-input" placeholder="Nom complet" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Grade</label>
+          <input type="text" name="grade" class="form-input" placeholder="Ex: Professeur, Maître de conférences" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Département</label>
+          <input type="text" name="departement" class="form-input" placeholder="Ex: MIM, SMU" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email professionnel</label>
+          <input type="email" name="email" class="form-input" placeholder="prenom.nom@ufrsta.uam.edu.sn" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Domaines de recherche</label>
+          <textarea name="domaines" class="form-input form-textarea" placeholder="Ex: Intelligence artificielle, Modélisation" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Photo</label>
+          <input type="file" name="photo" class="form-input" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primaire">Ajouter</button>
+      </form>
+    </div>
+
+    <div class="cards-grid" style="margin-top:2rem;">
+      {% if enseignants %}
+        {% for enseignant in enseignants %}
+        <div class="card">
+          <div class="card-body">
+            {% if enseignant.photo %}
+              <img src="{{ url_for('static', filename='uploads/enseignants/' ~ enseignant.photo) }}" alt="{{ enseignant.nom }}" style="width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:1rem;">
+            {% endif %}
+            <h3 class="card-title">{{ enseignant.nom }}</h3>
+            <p class="card-text"><strong>{{ enseignant.grade }}</strong></p>
+            <p class="card-text">Département : {{ enseignant.departement }}</p>
+            <p class="card-text">Email : {{ enseignant.email }}</p>
+            <p class="card-text">Domaines : {{ enseignant.domaines }}</p>
+            <a href="{{ url_for('supprimer_enseignant', id=enseignant.id) }}" class="btn" style="background:#e53e3e; color:#fff; font-size:0.85rem;">Supprimer</a>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p style="color:#666;">Aucun enseignant pour le moment.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
