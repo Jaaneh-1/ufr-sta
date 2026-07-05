@@ -1,10 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import os
+from functools import wraps
 
 app = Flask(__name__)
+app.secret_key = 'ufrsta2026'
 
 DATABASE = 'database/ufr_sta.db'
+ADMIN_USERNAME = 'admin'
+ADMIN_PASSWORD = 'ufrsta2026'
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
@@ -37,14 +41,33 @@ def init_db():
         departement TEXT NOT NULL,
         description TEXT NOT NULL
     )''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS galerie (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titre TEXT NOT NULL,
+        album TEXT NOT NULL,
+        photo TEXT NOT NULL
+    )''')
     conn.commit()
     conn.close()
 
 init_db()
 
+def login_requis(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if 'admin' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated
+
+# ========== ROUTES PUBLIQUES ==========
+
 @app.route('/')
 def index():
-    return render_template('index.html', actualites=[])
+    conn = get_db()
+    actualites = conn.execute('SELECT * FROM actualites ORDER BY id DESC LIMIT 3').fetchall()
+    conn.close()
+    return render_template('index.html', actualites=actualites)
 
 @app.route('/formations')
 def formations():
@@ -69,5 +92,145 @@ def galerie():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+# ========== LOGIN ==========
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+def login():
+    erreur = None
+    if request.method == 'POST':
+        if request.form['username'] == ADMIN_USERNAME and request.form['password'] == ADMIN_PASSWORD:
+            session['admin'] = True
+            return redirect(url_for('admin'))
+        else:
+            erreur = 'Identifiants incorrects !'
+    return render_template('admin/login.html', erreur=erreur)
+
+@app.route('/admin/logout')
+def logout():
+    session.pop('admin', None)
+    return redirect(url_for('login'))
+
+# ========== ADMIN ==========
+
+@app.route('/admin')
+@login_requis
+def admin():
+    return render_template('admin/index.html')
+
+# --- ACTUALITÉS ---
+@app.route('/admin/actualites')
+@login_requis
+def admin_actualites():
+    conn = get_db()
+    actualites = conn.execute('SELECT * FROM actualites ORDER BY id DESC').fetchall()
+    conn.close()
+    return render_template('admin/actualites.html', actualites=actualites)
+
+@app.route('/admin/actualites/ajouter', methods=['POST'])
+@login_requis
+def ajouter_actualite():
+    conn = get_db()
+    conn.execute('INSERT INTO actualites (titre, date, description) VALUES (?, ?, ?)',
+                 (request.form['titre'], request.form['date'], request.form['description']))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_actualites'))
+
+@app.route('/admin/actualites/supprimer/<int:id>')
+@login_requis
+def supprimer_actualite(id):
+    conn = get_db()
+    conn.execute('DELETE FROM actualites WHERE id=?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_actualites'))
+
+# --- ACTIVITÉS ---
+@app.route('/admin/activites')
+@login_requis
+def admin_activites():
+    conn = get_db()
+    activites = conn.execute('SELECT * FROM activites ORDER BY id DESC').fetchall()
+    conn.close()
+    return render_template('admin/activites.html', activites=activites)
+
+@app.route('/admin/activites/ajouter', methods=['POST'])
+@login_requis
+def ajouter_activite():
+    conn = get_db()
+    conn.execute('INSERT INTO activites (titre, date, lieu, organisateur, description) VALUES (?, ?, ?, ?, ?)',
+                 (request.form['titre'], request.form['date'], request.form['lieu'],
+                  request.form['organisateur'], request.form['description']))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_activites'))
+
+@app.route('/admin/activites/supprimer/<int:id>')
+@login_requis
+def supprimer_activite(id):
+    conn = get_db()
+    conn.execute('DELETE FROM activites WHERE id=?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_activites'))
+
+# --- FORMATIONS ---
+@app.route('/admin/formations')
+@login_requis
+def admin_formations():
+    conn = get_db()
+    formations = conn.execute('SELECT * FROM formations ORDER BY id DESC').fetchall()
+    conn.close()
+    return render_template('admin/formations.html', formations=formations)
+
+@app.route('/admin/formations/ajouter', methods=['POST'])
+@login_requis
+def ajouter_formation():
+    conn = get_db()
+    conn.execute('INSERT INTO formations (nom, niveau, duree, departement, description) VALUES (?, ?, ?, ?, ?)',
+                 (request.form['nom'], request.form['niveau'], request.form['duree'],
+                  request.form['departement'], request.form['description']))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_formations'))
+
+@app.route('/admin/formations/supprimer/<int:id>')
+@login_requis
+def supprimer_formation(id):
+    conn = get_db()
+    conn.execute('DELETE FROM formations WHERE id=?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_formations'))
+
+# --- GALERIE ---
+@app.route('/admin/galerie')
+@login_requis
+def admin_galerie():
+    conn = get_db()
+    photos = conn.execute('SELECT * FROM galerie ORDER BY id DESC').fetchall()
+    conn.close()
+    return render_template('admin/galerie.html', photos=photos)
+
+@app.route('/admin/galerie/ajouter', methods=['POST'])
+@login_requis
+def ajouter_photo():
+    conn = get_db()
+    conn.execute('INSERT INTO galerie (titre, album, photo) VALUES (?, ?, ?)',
+                 (request.form['titre'], request.form['album'], 'photo.jpg'))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_galerie'))
+
+@app.route('/admin/galerie/supprimer/<int:id>')
+@login_requis
+def supprimer_photo(id):
+    conn = get_db()
+    conn.execute('DELETE FROM galerie WHERE id=?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_galerie'))
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True)

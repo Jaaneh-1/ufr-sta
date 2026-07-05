@@ -2,73 +2,109 @@
 {% block title %}Contact — UFR STA{% endblock %}
 {% block content %}
 
-<header class="page-header">
-    <div class="container">
-        <div class="breadcrumb"><a href="{{ url_for('index') }}">Accueil</a> / Contact</div>
-        <h1>Contactez-nous</h1>
-        <p>Une question sur nos filières, nos départements ou un projet de
-           partenariat ? Écrivez-nous, notre équipe vous répond rapidement.</p>
-    </div>
-</header>
+<!-- ========== EN-TÊTE CONTACT ========== -->
+<section class="contact-header">
+  <h1 class="contact-header-titre">NOUS CONTACTER</h1>
+  <div class="contact-header-ligne"></div>
+  <p class="contact-header-desc">
+    Une question sur nos filières, nos départements ou un projet de partenariat ?
+    Notre équipe vous répond rapidement.
+  </p>
+</section>
 
-<section class="section">
-    <div class="container contact-grid">
-        <div>
-            <h2 style="font-size: 1.3rem;">Nos coordonnées</h2>
-            <div class="contact-info-item">
-                <div class="contact-info-icon">📍</div>
-                <div>
-                    <div class="contact-info-label">Adresse</div>
-                    <div class="contact-info-value">Rue 21x20, 2ème Arrondissement,<br>Pôle Urbain de Diamniadio<br>BP : 45927 Dakar NAFA VDN, Sénégal</div>
-                </div>
-            </div>
-            <div class="contact-info-item">
-                <div class="contact-info-icon">✉️</div>
-                <div>
-                    <div class="contact-info-label">Email UFR STA</div>
-                    <div class="contact-info-value"><a href="mailto:directeur-ufrsta@uam.edu.sn">directeur-ufrsta@uam.edu.sn</a></div>
-                </div>
-            </div>
-            <div class="contact-info-item">
-                <div class="contact-info-icon">📞</div>
-                <div>
-                    <div class="contact-info-label">Téléphone UAM</div>
-                    <div class="contact-info-value">+221 33 844 10 00 / +221 33 867 30 92</div>
-                </div>
-            </div>
-            <div class="contact-info-item">
-                <div class="contact-info-icon">🕗</div>
-                <div>
-                    <div class="contact-info-label">Horaires</div>
-                    <div class="contact-info-value">08h00 - 17h00</div>
-                </div>
-            </div>
-        </div>
+<!-- ========== CARTE GOOGLE MAPS ========== -->
+<div class="contact-map-wrap">
+  <iframe
+    src="https://maps.google.com/maps?q=Universit%C3%A9+Amadou+Mahtar+Mbow+Diamniadio&output=embed&z=15"
+    width="100%"
+    height="400"
+    style="border:0; display:block;"
+    allowfullscreen=""
+    loading="lazy">
+  </iframe>
+</div>
 
-        <div class="form-card">
-            <form method="POST" action="{{ url_for('contact') }}" novalidate>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nom">Nom complet</label>
-                        <input type="text" id="nom" name="nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adresse email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="sujet">Sujet</label>
-                    <input type="text" id="sujet" name="sujet" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Envoyer le message</button>
-            </form>
+<!-- ========== BLOCS INFO ========== -->
+<section class="section" style="background:#f5f5f5;">
+  <div class="container">
+
+    <div class="contact-blocs">
+
+      <div class="contact-bloc">
+        <div class="contact-bloc-cercle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="28" height="28">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
         </div>
+        <h5 class="contact-bloc-titre">Adresse :</h5>
+        <p class="contact-bloc-texte">
+          Rue 21x20, 2ème Arrondissement<br>
+          Pôle Urbain de Diamniadio<br>
+          BP : 45927 Dakar NAFA VDN, Sénégal
+        </p>
+      </div>
+
+      <div class="contact-bloc">
+        <div class="contact-bloc-cercle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="28" height="28">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 7l10 7 10-7"/>
+          </svg>
+        </div>
+        <h5 class="contact-bloc-titre">Email :</h5>
+        <a href="mailto:directeur-ufrsta@uam.edu.sn" class="contact-bloc-lien">directeur-ufrsta@uam.edu.sn</a>
+        <a href="mailto:contact@ufrsta.uam.edu.sn" class="contact-bloc-lien">contact@ufrsta.uam.edu.sn</a>
+      </div>
+
+      <div class="contact-bloc">
+        <div class="contact-bloc-cercle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="28" height="28">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <h5 class="contact-bloc-titre">Appelez-nous :</h5>
+        <p class="contact-bloc-texte">
+          +221 33 844 10 00<br>
+          +221 33 867 30 92
+        </p>
+      </div>
+
     </div>
+
+    <!-- Formulaire -->
+    <div class="contact-form-section">
+      <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">
+        Envoyez-nous un message
+      </h2>
+      <div class="form-card">
+        <form method="POST" action="{{ url_for('contact') }}" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nom">Nom complet</label>
+              <input type="text" id="nom" name="nom" class="form-input" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Adresse email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="votre@email.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="sujet">Sujet</label>
+            <input type="text" id="sujet" name="sujet" class="form-input" placeholder="Sujet de votre message" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea id="message" name="message" class="form-input form-textarea" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primaire" style="width:100%;">
+            Envoyer le message
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Connexion Admin — UFR STA{% endblock %}
+
+{% block content %}
+<section class="contact-header">
+  <h1 class="contact-header-titre">ESPACE ADMINISTRATION</h1>
+  <div class="contact-header-ligne"></div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:400px;">
+    <div class="admin-form-card">
+      <h2 class="section-title" style="text-align:center;">Connexion</h2>
+      <p style="text-align:center; color:#666; margin-bottom:1.5rem;">Accès réservé aux administrateurs</p>
+
+      {% if erreur %}
+      <p style="color:#e53e3e; text-align:center; margin-bottom:1rem;">{{ erreur }}</p>
+      {% endif %}
+
+      <form action="{{ url_for('login') }}" method="POST">
+        <div class="form-group">
+          <label class="form-label">Nom d'utilisateur</label>
+          <input type="text" name="username" class="form-input" placeholder="admin" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" name="password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primaire" style="width:100%;">Se connecter</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

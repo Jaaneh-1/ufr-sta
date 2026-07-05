@@ -914,3 +914,215 @@ textarea { resize: vertical; min-height: 130px; }
     .form-row { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr; }
 }
+
+
+/* ADMIN HERO GRID */
+.admin-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    background: #1a1a1a;
+}
+
+.admin-hero-card {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+}
+
+.admin-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.admin-hero-card:hover .admin-hero-img { transform: scale(1.05); }
+
+.admin-hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    transition: background 0.3s;
+}
+
+.admin-hero-card:hover .admin-hero-overlay {
+    background: linear-gradient(to top, rgba(139,58,42,0.9) 0%, rgba(139,58,42,0.5) 50%, rgba(0,0,0,0.2) 100%);
+}
+
+.admin-hero-content {
+    position: absolute;
+    bottom: 0; left: 0;
+    padding: 2rem;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.admin-hero-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #8B3A2A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.admin-hero-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.admin-hero-desc {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.admin-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #8B3A2A;
+    color: #ffffff;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.admin-hero-card:hover .admin-hero-btn { background: #00A8B5; }
+
+@media (max-width: 768px) {
+    .admin-hero-grid { grid-template-columns: 1fr; }
+    .admin-hero-card { height: 280px; }
+}
+
+
+
+
+
+
+
+
+/* CONTACT HEADER */
+.contact-header {
+    background: #fff;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.contact-header-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #8B3A2A;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.contact-header-ligne {
+    width: 60px;
+    height: 4px;
+    background: #8B3A2A;
+    margin: 0 auto 1.5rem;
+    border-radius: 2px;
+}
+
+.contact-header-desc {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* CONTACT MAP */
+.contact-map-wrap {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 4px solid #00A8B5;
+}
+
+/* 3 BLOCS CONTACT */
+.contact-blocs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.contact-bloc {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-top: 4px solid #8B3A2A;
+}
+
+.contact-bloc-cercle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #8B3A2A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+}
+
+.contact-bloc-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #8B3A2A;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.contact-bloc-texte {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.contact-bloc-lien {
+    color: #00A8B5;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+    transition: color 0.2s;
+}
+
+.contact-bloc-lien:hover { color: #8B3A2A; }
+
+/* FORMULAIRE CONTACT */
+.contact-form-section { max-width: 700px; margin: 0 auto; }
+
+.form-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .contact-blocs { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-header-titre { font-size: 2rem; }
+}

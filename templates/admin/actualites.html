@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Admin Actualités — UFR STA{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+      <h2 class="section-title" style="margin-bottom:0;">Gestion des Actualités</h2>
+      <a href="{{ url_for('admin') }}" class="btn btn-outline" style="border-color:#8B3A2A; color:#8B3A2A;">← Retour</a>
+    </div>
+    <div class="admin-form-card">
+      <h3 class="admin-form-titre">Ajouter une actualité</h3>
+      <form action="{{ url_for('ajouter_actualite') }}" method="POST">
+        <div class="form-group">
+          <label class="form-label">Titre</label>
+          <input type="text" name="titre" class="form-input" placeholder="Titre de l'actualité" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input type="date" name="date" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-input form-textarea" placeholder="Description complète" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primaire">Ajouter</button>
+      </form>
+    </div>
+    <div class="cards-grid" style="margin-top:2rem;">
+      {% if actualites %}
+        {% for actu in actualites %}
+        <div class="card">
+          <div class="card-body">
+            <span class="badge-date">{{ actu.date }}</span>
+            <h3 class="card-title">{{ actu.titre }}</h3>
+            <p class="card-text">{{ actu.description[:80] }}...</p>
+            <a href="{{ url_for('supprimer_actualite', id=actu.id) }}" class="btn" style="background:#e53e3e; color:#fff; font-size:0.85rem;">Supprimer</a>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p style="color:#666;">Aucune actualité pour le moment.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
