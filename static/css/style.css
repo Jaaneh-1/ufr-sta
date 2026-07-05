@@ -176,8 +176,109 @@ img { max-width: 100%; display: block; }
 
 
 /* =============================================
-   À COLLER À LA FIN DE style.css
+   Jaaaneh
 ============================================= */
+
+/* PAGE ENSEIGNANTS */
+.enseignant-card {
+  background: linear-gradient(145deg, #fff, #faf7f4);
+  border: 1px solid rgba(139,58,42,0.08);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.enseignant-card .card-body {
+  padding: 1.4rem;
+}
+.enseignant-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.enseignant-photo {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(139,58,42,0.2);
+  flex-shrink: 0;
+}
+.enseignant-initials {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--marron), #b55a41);
+  color: var(--blanc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.enseignant-meta {
+  display: grid;
+  gap: 0.3rem;
+}
+.enseignant-grade {
+  font-size: 0.9rem;
+  color: var(--turquoise);
+  font-weight: 600;
+}
+.enseignant-details {
+  display: grid;
+  gap: 0.55rem;
+  font-size: 0.92rem;
+  color: #4f4f4f;
+}
+.enseignant-details strong { color: var(--texte); }
+.enseignant-details a { color: var(--marron); font-weight: 600; }
+.enseignant-domaines {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.2rem;
+}
+.enseignant-domaines span {
+  background: rgba(0,168,181,0.1);
+  color: #007a87;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.enseignants-toolbar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.enseignant-search,
+.enseignant-select {
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  min-width: 240px;
+  outline: none;
+}
+.enseignant-search:focus,
+.enseignant-select:focus {
+  border-color: var(--turquoise);
+  box-shadow: 0 0 0 3px rgba(0,168,181,0.12);
+}
+.enseignant-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--gris);
+  padding: 2rem;
+  background: var(--gris-clair);
+  border-radius: var(--radius);
+}
 
 /* PAGE HERO */
 .page-hero {

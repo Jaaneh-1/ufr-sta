@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import os
 from functools import wraps
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = 'ufrsta2026'
@@ -9,6 +10,10 @@ app.secret_key = 'ufrsta2026'
 DATABASE = 'database/ufr_sta.db'
 ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = 'ufrsta2026'
+UPLOAD_FOLDER = 'static/uploads/enseignants'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
@@ -47,6 +52,15 @@ def init_db():
         album TEXT NOT NULL,
         photo TEXT NOT NULL
     )''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS enseignants (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nom TEXT NOT NULL,
+        grade TEXT NOT NULL,
+        departement TEXT NOT NULL,
+        email TEXT NOT NULL,
+        domaines TEXT NOT NULL,
+        photo TEXT
+    )''')
     conn.commit()
     conn.close()
 
@@ -84,6 +98,13 @@ def actualites():
 @app.route('/activites')
 def activites():
     return render_template('activites.html')
+
+@app.route('/enseignants')
+def enseignants():
+    conn = get_db()
+    enseignants = conn.execute('SELECT * FROM enseignants ORDER BY id ASC').fetchall()
+    conn.close()
+    return render_template('enseignants.html', enseignants=enseignants)
 
 @app.route('/galerie')
 def galerie():
@@ -203,6 +224,56 @@ def supprimer_formation(id):
     conn.commit()
     conn.close()
     return redirect(url_for('admin_formations'))
+
+# --- ENSEIGNANTS ---
+@app.route('/admin/enseignants')
+@login_requis
+def admin_enseignants():
+    conn = get_db()
+    enseignants = conn.execute('SELECT * FROM enseignants ORDER BY id ASC').fetchall()
+    conn.close()
+    return render_template('admin/enseignants.html', enseignants=enseignants)
+
+@app.route('/admin/enseignants/ajouter', methods=['POST'])
+@login_requis
+def ajouter_enseignant():
+    nom = request.form['nom']
+    grade = request.form['grade']
+    departement = request.form['departement']
+    email = request.form['email']
+    domaines = request.form['domaines']
+
+    photo = None
+    if 'photo' in request.files:
+        file = request.files['photo']
+        if file and file.filename:
+            filename = secure_filename(file.filename)
+            if '.' in filename:
+                extension = filename.rsplit('.', 1)[1].lower()
+                if extension in ALLOWED_EXTENSIONS:
+                    photo = f"{nom.lower().replace(' ', '_')}_{len(os.listdir(UPLOAD_FOLDER)) + 1}.{extension}"
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], photo))
+
+    conn = get_db()
+    conn.execute('INSERT INTO enseignants (nom, grade, departement, email, domaines, photo) VALUES (?, ?, ?, ?, ?, ?)',
+                 (nom, grade, departement, email, domaines, photo))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_enseignants'))
+
+@app.route('/admin/enseignants/supprimer/<int:id>')
+@login_requis
+def supprimer_enseignant(id):
+    conn = get_db()
+    enseignant = conn.execute('SELECT * FROM enseignants WHERE id=?', (id,)).fetchone()
+    if enseignant and enseignant['photo']:
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], enseignant['photo'])
+        if os.path.exists(file_path):
+            os.remove(file_path)
+    conn.execute('DELETE FROM enseignants WHERE id=?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin_enseignants'))
 
 # --- GALERIE ---
 @app.route('/admin/galerie')

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Enseignants — UFR STA{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <p class="hero-eyebrow">Corps académique</p>
+    <h1 class="page-hero-titre">Nos enseignants</h1>
+    <p class="page-hero-desc">
+      Découvrez la présentation de notre équipe pédagogique et scientifique,
+      composée d’enseignants-chercheurs engagés dans la formation et la recherche.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title" style="text-align:center; margin-bottom:2rem;">
+      <h2 class="section-title">Présentation des enseignants</h2>
+      <p class="section-subtitle">Chaque profil met en avant les informations essentielles demandées.</p>
+    </div>
+
+    <div class="enseignants-toolbar">
+      <input type="search" id="enseignant-search" class="enseignant-search" placeholder="Rechercher un enseignant..." aria-label="Rechercher un enseignant">
+      <select id="enseignant-departement" class="enseignant-select" aria-label="Filtrer par département">
+        <option value="all">Tous les départements</option>
+        <option value="MIM">MIM</option>
+        <option value="SMU">SMU</option>
+        <option value="Informatique">Informatique</option>
+        <option value="Physique">Physique</option>
+      </select>
+    </div>
+
+    <div class="cards-grid" id="enseignants-grid">
+      {% if enseignants %}
+        {% for enseignant in enseignants %}
+        <article class="card reveal enseignant-card" data-departement="{{ enseignant.departement }}">
+          <div class="card-body">
+            <div class="enseignant-profile">
+              {% if enseignant.photo %}
+                <img class="enseignant-photo" src="{{ url_for('static', filename='uploads/enseignants/' ~ enseignant.photo) }}" alt="{{ enseignant.nom }}">
+              {% else %}
+                <div class="enseignant-initials">{{ enseignant.nom.split()[-1][:2]|upper }}</div>
+              {% endif %}
+              <div class="enseignant-meta">
+                <h3 class="card-title">{{ enseignant.nom }}</h3>
+                <p class="enseignant-grade">{{ enseignant.grade }}</p>
+              </div>
+            </div>
+            <div class="enseignant-details">
+              <div><strong>Département :</strong> {{ enseignant.departement }}</div>
+              <div><strong>Email professionnel :</strong> <a href="mailto:{{ enseignant.email }}">{{ enseignant.email }}</a></div>
+              <div><strong>Domaines de recherche :</strong>
+                <div class="enseignant-domaines">
+                  {% for domaine in enseignant.domaines.split(',') %}
+                    <span>{{ domaine.strip() }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p style="color:#666;">Aucun enseignant n’est encore enregistré.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  const searchInput = document.getElementById('enseignant-search');
+  const deptSelect = document.getElementById('enseignant-departement');
+  const cards = Array.from(document.querySelectorAll('#enseignants-grid .enseignant-card'));
+  const grid = document.getElementById('enseignants-grid');
+
+  if (!grid || !cards.length) return;
+
+  const emptyState = document.createElement('p');
+  emptyState.className = 'enseignant-empty';
+  emptyState.textContent = 'Aucun enseignant ne correspond à votre recherche.';
+  grid.appendChild(emptyState);
+  emptyState.hidden = true;
+
+  function applyFilters() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const dept = (deptSelect?.value || 'all').toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const text = (card.textContent || '').toLowerCase();
+      const cardDept = (card.getAttribute('data-departement') || '').toLowerCase();
+      const matchesSearch = !query || text.includes(query);
+      const matchesDept = dept === 'all' || cardDept === dept;
+      const show = matchesSearch && matchesDept;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+
+    emptyState.hidden = visibleCount !== 0;
+  }
+
+  searchInput?.addEventListener('input', applyFilters);
+  deptSelect?.addEventListener('change', applyFilters);
+})();
+</script>
+{% endblock %}
