@@ -144,5 +144,40 @@ showSlide(index);
 };
 
 });
+
+function ouvrirAlbum(id) {
+
+    let titre = "";
+    let description = "";
+
+    if (id === "excellence2026") {
+        titre = "Journée de l'Excellence";
+        description = "Cette journée récompense les meilleurs étudiants de l'UFR STA pour leurs excellents résultats académiques.";
+    }
+
+    if (id === "feuxdecamp2026") {
+        titre = "Nuit de Feux au Campus";
+        description = "Une soirée conviviale organisée au campus avec des animations, des échanges et des activités culturelles.";
+    }
+
+    if (id === "foot2026") {
+        titre = "Trophée Football";
+        description = "Compétition sportive réunissant les étudiants de l'UFR STA autour du football.";
+    }
+
+    document.getElementById("lightboxCaption").innerHTML =
+        "<h2>" + titre + "</h2><p>" + description + "</p>";
+
+    document.getElementById("lightboxImg").style.display = "none";
+
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function fermerLightbox(event) {
+    if (!event || event.target.id === "lightbox") {
+        document.getElementById("lightbox").style.display = "none";
+        document.getElementById("lightboxImg").style.display = "block";
+    }
+}
 </script>
 {% endblock %}
