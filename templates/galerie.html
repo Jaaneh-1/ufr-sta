@@ -3,146 +3,172 @@
 
 {% block content %}
 <section class="galerie-hero">
-
+  <div class="hero-slides">
     <div class="slide active">
-        <img src="{{ url_for('static', filename='images/hero1.jpg') }}">
+      <img src="{{ url_for('static', filename='images/hero1.jpg') }}" alt="">
     </div>
-
     <div class="slide">
-        <img src="{{ url_for('static', filename='images/hero2.jpg') }}">
+      <img src="{{ url_for('static', filename='images/hero2.jpg') }}" alt="">
     </div>
+  </div>
+  <div class="overlay"></div>
 
-    <div class="overlay"></div>
+  <div class="hero-content container">
+    <span class="hero-badge">UFR STA • Galerie</span>
+    <h1>Galerie Photos</h1>
+    <p>
+      Revivez les meilleurs moments de l’UFR STA : conférences, journées scientifiques,
+      cérémonies, compétitions sportives et activités étudiantes.
+    </p>
+    <a href="#albums" class="hero-btn">Découvrir la galerie</a>
+  </div>
 
-    <div class="hero-content">
-        <h1>Galerie Photos</h1>
+  <button class="prev" type="button" aria-label="Image précédente">&#10094;</button>
+  <button class="next" type="button" aria-label="Image suivante">&#10095;</button>
 
-        <p>
-            Revivez les meilleurs moments de l'UFR STA :
-            conférences, journées scientifiques, cérémonies,
-            compétitions sportives et activités étudiantes.
-        </p>
-
-        <a href="#albums" class="hero-btn">
-            Découvrir la galerie
-        </a>
-
-    </div>
-
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
-
-    <div class="dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-    </div>
-
-</section>
-
-<section class="presentation-ufr">
-  <div class="container">
-    <h2>Présentation de l'UFR STA</h2>
-    <p>Bienvenue dans la galerie des activités de l'UFR STA.</p>
+  <div class="dots" aria-label="Sélectionner une image">
+    <span class="dot active"></span>
+    <span class="dot"></span>
   </div>
 </section>
 
-<div id="albums"></div>
-
-<section class="section galerie-annee">
+<section class="presentation-ufr section">
   <div class="container">
+    <div class="intro-block">
+      <h2>Présentation de la galerie</h2>
+      <p>Bienvenue dans la galerie des activités de l’UFR STA. Chaque album retrace un moment marquant de la vie académique, scientifique et sportive de notre communauté.</p>
+    </div>
+  </div>
+</section>
+
+<section id="albums" class="section galerie-annee">
+  <div class="container">
+    <div class="galerie-annee-header">
+      <h2 class="galerie-annee-titre">Albums</h2>
+      <div class="galerie-annee-line"></div>
+    </div>
+
+    {% if albums %}
     <div class="albums-grid">
-      <div class="album-card" onclick="ouvrirAlbum('excellence2026')">
-        <img src="{{ url_for('static', filename='images/excelence.jpg') }}" class="album-img">
-        <h3>Journée de l'Excellence</h3>
-      </div>
-
-
-      <div class="album-card" onclick="ouvrirAlbum('feuxdecamp2026')">
-        <img src="{{ url_for('static', filename='images/feuxdecamp.jpg') }}" class="album-img">
-        <h3>nuit de feux au campus pedagogique</h3>
-      </div>
-
-      <div class="album-card" onclick="ouvrirAlbum('foot2026')">
-        <img src="{{ url_for('static', filename='images/foot.jpg') }}" class="album-img">
-        <h3>Trophée Football</h3>
-      </div>
+      {% for album in albums %}
+      <a class="album-card" href="{{ url_for('galerie_album', slug=album.slug) }}">
+        <div class="album-cover">
+          <img src="{{ url_for('static', filename=album.cover) }}" class="album-img" alt="{{ album.title }}">
+          <div class="album-overlay"><span class="album-voir">Voir l'album</span></div>
+        </div>
+        <div class="album-info">
+          <span class="album-cat-badge">{{ album.title }}</span>
+          <h3 class="album-titre">{{ album.title }}</h3>
+          <p class="album-date">{{ album.date }}</p>
+        </div>
+      </a>
+      {% endfor %}
     </div>
+    {% else %}
+    <div class="intro-block">
+      <p>Aucune photo n’a encore été ajoutée depuis l’administration.</p>
+    </div>
+    {% endif %}
   </div>
 </section>
 
-<div class="lightbox" id="lightbox" onclick="fermerLightbox(event)">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galerie photo">
+  <button class="lightbox-close" type="button" aria-label="Fermer">✕</button>
+  <button class="lightbox-prev" type="button" aria-label="Image précédente">&#10094;</button>
+  <button class="lightbox-next" type="button" aria-label="Image suivante">&#10095;</button>
   <div class="lightbox-inner">
-    <button onclick="fermerLightbox()">✕</button>
-    <img id="lightboxImg">
-    <div id="lightboxCaption"></div>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="">
+    <div class="lightbox-caption"></div>
+    <div class="lightbox-counter"></div>
   </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-const slides=document.querySelectorAll(".slide");
+const slides = document.querySelectorAll('.galerie-hero .slide');
+const dots = document.querySelectorAll('.galerie-hero .dot');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.querySelector('.lightbox-caption');
+const lightboxCounter = document.querySelector('.lightbox-counter');
+const albumButtons = document.querySelectorAll('.album-card[data-photo]');
+const galleryPhotos = Array.from(albumButtons).map((button) => ({
+  src: button.dataset.photo,
+  caption: button.dataset.caption
+}));
 
-const dots=document.querySelectorAll(".dot");
+let currentSlide = 0;
+let currentIndex = 0;
 
-let index=0;
-
-function showSlide(n){
-
-slides.forEach(s=>s.classList.remove("active"));
-
-dots.forEach(d=>d.classList.remove("active"));
-
-slides[n].classList.add("active");
-
-dots[n].classList.add("active");
-
+function showSlide(n) {
+  slides.forEach((slide) => slide.classList.remove('active'));
+  dots.forEach((dot) => dot.classList.remove('active'));
+  currentSlide = (n + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
 }
 
-function nextSlide(){
-
-index++;
-
-if(index>=slides.length){
-
-index=0;
-
+function nextSlide() {
+  showSlide(currentSlide + 1);
 }
 
-showSlide(index);
-
+function prevSlide() {
+  showSlide(currentSlide - 1);
 }
 
-function prevSlide(){
-
-index--;
-
-if(index<0){
-
-index=slides.length-1;
-
+function openLightbox(index = 0) {
+  if (!galleryPhotos.length) return;
+  currentIndex = index;
+  lightboxImg.src = galleryPhotos[currentIndex].src;
+  lightboxImg.alt = galleryPhotos[currentIndex].caption;
+  lightboxCaption.textContent = galleryPhotos[currentIndex].caption;
+  lightboxCounter.textContent = `${currentIndex + 1}/${galleryPhotos.length}`;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-showSlide(index);
-
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
-document.querySelector(".next").onclick=nextSlide;
+function showLightboxPhoto(index) {
+  if (!galleryPhotos.length) return;
+  currentIndex = (index + galleryPhotos.length) % galleryPhotos.length;
+  lightboxImg.src = galleryPhotos[currentIndex].src;
+  lightboxImg.alt = galleryPhotos[currentIndex].caption;
+  lightboxCaption.textContent = galleryPhotos[currentIndex].caption;
+  lightboxCounter.textContent = `${currentIndex + 1}/${galleryPhotos.length}`;
+}
 
-document.querySelector(".prev").onclick=prevSlide;
+document.querySelector('.galerie-hero .next').addEventListener('click', nextSlide);
+document.querySelector('.galerie-hero .prev').addEventListener('click', prevSlide);
 
-setInterval(nextSlide,5000);
-
-dots.forEach((dot,i)=>{
-
-dot.onclick=()=>{
-
-index=i;
-
-showSlide(index);
-
-};
-
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => showSlide(index));
 });
+
+albumButtons.forEach((button, index) => {
+  button.addEventListener('click', () => openLightbox(index));
+});
+
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+document.querySelector('.lightbox-next').addEventListener('click', () => showLightboxPhoto(currentIndex + 1));
+document.querySelector('.lightbox-prev').addEventListener('click', () => showLightboxPhoto(currentIndex - 1));
+
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (event.key === 'Escape') closeLightbox();
+  if (event.key === 'ArrowRight') showLightboxPhoto(currentIndex + 1);
+  if (event.key === 'ArrowLeft') showLightboxPhoto(currentIndex - 1);
+});
+
+setInterval(nextSlide, 5000);
+showSlide(0);
 </script>
 {% endblock %}

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}{{ album_title }} — Galerie UFR STA{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="galerie-breadcrumb">
+      <a href="{{ url_for('galerie') }}">← Retour à la galerie</a>
+    </div>
+
+    <div class="album-hero">
+      <h1>{{ album_title }}</h1>
+      <p>{{ album_date or 'Album de la galerie de l’UFR STA' }}</p>
+    </div>
+
+    {% if photos %}
+    <div class="album-photos-grid">
+      {% for photo in photos %}
+      <button class="album-photo-card" type="button" data-photo="{{ url_for('static', filename=photo.photo) }}" data-caption="{{ photo.titre }} — {{ photo.album }}">
+        <img src="{{ url_for('static', filename=photo.photo) }}" alt="{{ photo.titre }}">
+      </button>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="intro-block">
+      <p>Aucune photo n’est disponible pour cet album.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galerie photo">
+  <button class="lightbox-close" type="button" aria-label="Fermer">✕</button>
+  <button class="lightbox-prev" type="button" aria-label="Image précédente">&#10094;</button>
+  <button class="lightbox-next" type="button" aria-label="Image suivante">&#10095;</button>
+  <div class="lightbox-inner">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="">
+    <div class="lightbox-caption"></div>
+    <div class="lightbox-counter"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.querySelector('.lightbox-caption');
+const lightboxCounter = document.querySelector('.lightbox-counter');
+const photoButtons = document.querySelectorAll('.album-photo-card');
+const galleryPhotos = Array.from(photoButtons).map((button) => ({
+  src: button.dataset.photo,
+  caption: button.dataset.caption
+}));
+let currentIndex = 0;
+
+function openLightbox(index = 0) {
+  if (!galleryPhotos.length) return;
+  currentIndex = index;
+  lightboxImg.src = galleryPhotos[currentIndex].src;
+  lightboxImg.alt = galleryPhotos[currentIndex].caption;
+  lightboxCaption.textContent = galleryPhotos[currentIndex].caption;
+  lightboxCounter.textContent = `${currentIndex + 1}/${galleryPhotos.length}`;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showLightboxPhoto(index) {
+  if (!galleryPhotos.length) return;
+  currentIndex = (index + galleryPhotos.length) % galleryPhotos.length;
+  lightboxImg.src = galleryPhotos[currentIndex].src;
+  lightboxImg.alt = galleryPhotos[currentIndex].caption;
+  lightboxCaption.textContent = galleryPhotos[currentIndex].caption;
+  lightboxCounter.textContent = `${currentIndex + 1}/${galleryPhotos.length}`;
+}
+
+photoButtons.forEach((button, index) => {
+  button.addEventListener('click', () => openLightbox(index));
+});
+
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+document.querySelector('.lightbox-next').addEventListener('click', () => showLightboxPhoto(currentIndex + 1));
+document.querySelector('.lightbox-prev').addEventListener('click', () => showLightboxPhoto(currentIndex - 1));
+
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (event.key === 'Escape') closeLightbox();
+  if (event.key === 'ArrowRight') showLightboxPhoto(currentIndex + 1);
+  if (event.key === 'ArrowLeft') showLightboxPhoto(currentIndex - 1);
+});
+</script>
+{% endblock %}

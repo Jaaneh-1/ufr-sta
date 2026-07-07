@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 import sqlite3
 import os
+import re
+import uuid
 from functools import wraps
 from werkzeug.utils import secure_filename
 
@@ -11,8 +13,10 @@ DATABASE = 'database/ufr_sta.db'
 ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = 'ufrsta2026'
 UPLOAD_FOLDER = 'static/uploads/enseignants'
+GALLERY_UPLOAD_FOLDER = 'static/uploads/galerie'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['GALLERY_UPLOAD_FOLDER'] = GALLERY_UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 def get_db():
@@ -20,8 +24,15 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+def slugify(value):
+    value = value or ""
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-")
+
+
 def init_db():
     os.makedirs('database', exist_ok=True)
+    os.makedirs(GALLERY_UPLOAD_FOLDER, exist_ok=True)
     conn = get_db()
     conn.execute('''CREATE TABLE IF NOT EXISTS actualites (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,8 +61,12 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         titre TEXT NOT NULL,
         album TEXT NOT NULL,
+        date TEXT,
         photo TEXT NOT NULL
     )''')
+    columns = [row[1] for row in conn.execute('PRAGMA table_info(galerie)').fetchall()]
+    if 'date' not in columns:
+        conn.execute('ALTER TABLE galerie ADD COLUMN date TEXT')
     conn.execute('''CREATE TABLE IF NOT EXISTS enseignants (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nom TEXT NOT NULL,
@@ -108,7 +123,45 @@ def enseignants():
 
 @app.route('/galerie')
 def galerie():
-    return render_template('galerie.html')
+    conn = get_db()
+    photos = conn.execute('SELECT * FROM galerie ORDER BY album, id DESC').fetchall()
+    conn.close()
+
+    albums = []
+    grouped = {}
+    for photo in photos:
+        album_name = photo['album']
+        if album_name not in grouped:
+            grouped[album_name] = {
+                'title': album_name,
+                'date': photo['date'] or '',
+                'cover': photo['photo'],
+                'slug': slugify(album_name),
+                'photos': []
+            }
+        grouped[album_name]['photos'].append(photo)
+
+    albums = list(grouped.values())
+    albums.sort(key=lambda item: item['date'] or '', reverse=True)
+    return render_template('galerie.html', albums=albums)
+
+
+@app.route('/galerie/<slug>')
+def galerie_album(slug):
+    conn = get_db()
+    photos = conn.execute('SELECT * FROM galerie ORDER BY id DESC').fetchall()
+    conn.close()
+
+    album_photos = [photo for photo in photos if slugify(photo['album']) == slug]
+    if not album_photos:
+        abort(404)
+
+    return render_template(
+        'galerie_album.html',
+        album_title=album_photos[0]['album'],
+        album_date=album_photos[0]['date'] or '',
+        photos=album_photos
+    )
 
 @app.route('/contact')
 def contact():
@@ -287,9 +340,32 @@ def admin_galerie():
 @app.route('/admin/galerie/ajouter', methods=['POST'])
 @login_requis
 def ajouter_photo():
+    titre = request.form.get('titre', '').strip()
+    album = request.form.get('album', '').strip()
+    date = request.form.get('date', '').strip()
+
+    files = request.files.getlist('photo')
+    if not files:
+        return redirect(url_for('admin_galerie'))
+
     conn = get_db()
-    conn.execute('INSERT INTO galerie (titre, album, photo) VALUES (?, ?, ?)',
-                 (request.form['titre'], request.form['album'], 'photo.jpg'))
+    for file in files:
+        if not file or not file.filename:
+            continue
+        filename = secure_filename(file.filename)
+        if '.' in filename:
+            extension = filename.rsplit('.', 1)[1].lower()
+            if extension in ALLOWED_EXTENSIONS:
+                unique_name = f"{uuid.uuid4().hex}.{extension}"
+                save_path = os.path.join(app.config['GALLERY_UPLOAD_FOLDER'], unique_name)
+                file.save(save_path)
+                photo_path = f"uploads/galerie/{unique_name}"
+
+                # If title not provided, use filename (without extension)
+                row_title = titre if titre else os.path.splitext(filename)[0]
+
+                conn.execute('INSERT INTO galerie (titre, album, date, photo) VALUES (?, ?, ?, ?)',
+                             (row_title, album, date, photo_path))
     conn.commit()
     conn.close()
     return redirect(url_for('admin_galerie'))
@@ -298,6 +374,11 @@ def ajouter_photo():
 @login_requis
 def supprimer_photo(id):
     conn = get_db()
+    photo = conn.execute('SELECT * FROM galerie WHERE id=?', (id,)).fetchone()
+    if photo and photo['photo']:
+        file_path = os.path.join('static', photo['photo'])
+        if os.path.exists(file_path):
+            os.remove(file_path)
     conn.execute('DELETE FROM galerie WHERE id=?', (id,))
     conn.commit()
     conn.close()
